@@ -44,13 +44,27 @@ class SpeechUpdater:
         logger.info(f"Backup of metadata created at {backup_file}")
 
     def merge_metadata(self, new_metadata):
-        """
-        Merge new metadata with the existing metadata using set-based operations to ensure no duplicates.
-        :param new_metadata: A list of dictionaries containing the new metadata.
-        """
         logger.info(f"Merging {len(new_metadata)} new metadata entries.")
+
+        # 如果 new_metadata 为空，提前返回
+        if not new_metadata:
+            logger.info("No new metadata to merge. Skipping merge process.")
+            return
+
         new_metadata_df = pd.DataFrame(new_metadata)
 
+        # 检查 new_metadata_df 是否为空
+        if new_metadata_df.empty:
+            logger.info("New metadata DataFrame is empty. No data to merge.")
+            return
+
+        # 检查 'url' 列是否存在
+        if 'url' not in new_metadata_df.columns:
+            logger.error("The 'url' column is missing from the new metadata DataFrame.")
+            logger.debug(f"New metadata DataFrame columns: {new_metadata_df.columns.tolist()}")
+            return
+
+        # 后续合并处理
         if not self.metadata_df.empty:
             existing_urls = set(self.metadata_df['url'])
             new_urls = set(new_metadata_df['url'])
@@ -59,6 +73,8 @@ class SpeechUpdater:
             self.metadata_df = pd.concat([self.metadata_df, unique_new_metadata_df], ignore_index=True)
         else:
             self.metadata_df = new_metadata_df
+
+
 
     def save_metadata(self):
         """
@@ -69,12 +85,13 @@ class SpeechUpdater:
         logger.info(f"Metadata saved successfully.")
 
     def update(self, new_metadata):
-        """
-        The main update function that handles merging, backing up, and saving new metadata.
-        :param new_metadata: A list of dictionaries containing the new metadata.
-        """
+        if not new_metadata:
+            logger.info("No new metadata provided. Skipping update.")
+            return
+
         if self.backup_folder:
             self.backup_metadata()
         self.merge_metadata(new_metadata)
         self.save_metadata()
         logger.info("Metadata update completed.")
+
