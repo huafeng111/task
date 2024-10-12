@@ -26,7 +26,6 @@ class SpeechDownloader:
         self.start_year = start_year
         self.speech_metadata = []
         self.downloaded_files = set()  # 用于记录已下载的文件，防止重复下载
-        self.processed_urls = set()    # 记录已经处理过的 PDF URL
         self.lock = Lock()  # 线程锁，确保线程安全
 
         # Ensure the base folder exists
@@ -47,6 +46,7 @@ class SpeechDownloader:
         if not soup:
             return
 
+        # 获取所有指向演讲详情页面的链接
         speech_page_links = [
             link['href'] for link in soup.find_all('a', href=True)
             if link['href'].startswith("/newsevents/speech/") and link['href'].endswith(".htm")
@@ -57,9 +57,16 @@ class SpeechDownloader:
             self._fetch_pdf_links_from_speech_page(full_page_url, year, year_folder)
 
     def _fetch_pdf_links_from_speech_page(self, page_url, year, year_folder):
+        """
+        从特定的演讲页面中提取与该演讲相关的 PDF 链接。
+        只会提取与页面 URL 部分匹配的 PDF 文件。
+        """
         soup = _get_soup_from_url(page_url)
         if not soup:
             return
+
+        # 提取页面的文件名（用于匹配 .pdf 文件）
+        page_filename = os.path.basename(page_url).split(".htm")[0]  # 例如 bowman20231205a
 
         title_tag = soup.find('h3', class_='title')
         title = title_tag.find('em').get_text(strip=True) if title_tag and title_tag.find('em') else "No Title"
@@ -70,20 +77,16 @@ class SpeechDownloader:
         date_tag = soup.find('p', class_='article__time')
         date = date_tag.get_text(strip=True) if date_tag else "Unknown Date"
 
+        # 搜索与当前演讲页面相关的 .pdf 链接
         pdf_links = [
-            link['href'] for link in soup.find_all('a', href=True) if link['href'].endswith(".pdf")
+            link['href'] for link in soup.find_all('a', href=True)
+            if link['href'].endswith(".pdf") and page_filename in link['href']
         ]
 
+        # 下载匹配的 PDF 文件
         for pdf_url in pdf_links:
             if pdf_url.startswith("/"):
                 pdf_url = f"https://www.federalreserve.gov{pdf_url}"
-
-            # 防止重复处理同一个 PDF URL，使用锁保证线程安全
-            with self.lock:
-                if pdf_url in self.processed_urls:
-                    continue  # 如果已经处理过，直接跳过
-                self.processed_urls.add(pdf_url)
-
             self._download_speech_pdf(pdf_url, year, year_folder, title, author, date)
 
     def _download_speech_pdf(self, url, year, year_folder, title, author, date):
@@ -99,13 +102,11 @@ class SpeechDownloader:
         save_path = os.path.join(year_folder, filename)
 
         with self.lock:
-            # 线程安全检查，防止多个线程同时下载同一个文件
             if save_path in self.downloaded_files:
                 logger.info(f"Speech {filename} already exists. Skipping download.")
                 return
             self.downloaded_files.add(save_path)
 
-        # 如果文件不存在，则下载并保存
         if not os.path.exists(save_path):
             with open(save_path, 'wb') as f:
                 f.write(response.content)
@@ -119,8 +120,7 @@ class SpeechDownloader:
                 'file_path': save_path,
             }
             self.speech_metadata.append(metadata)
-        else:
-            logger.info(f"Speech {filename} already exists. Skipping download.")
+
 
     def save_metadata(self):
         logger.info("Saving metadata using updater...")
