@@ -8,8 +8,14 @@ from threading import Lock
 from SpeechUpdater import SpeechUpdater  # Import the updater module
 import SpeechParser  # Import the parser module
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# Configure logging to file and console
+log_filename = 'speech_downloader.log'
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    handlers=[
+                        logging.FileHandler(log_filename),  # Log to file
+                        logging.StreamHandler()  # Log to console
+                    ])
 logger = logging.getLogger(__name__)
 
 class SpeechDownloader:
