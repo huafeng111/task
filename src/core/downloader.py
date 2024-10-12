@@ -119,8 +119,13 @@ class SpeechDownloader:
             logger.error(f"Failed to download speech from URL: {url}")
             return
 
-        # Extract the filename from the URL using UUID to ensure uniqueness
-        filename = f"{uuid.uuid4()}_speech_{year}.pdf"
+        # Generate a filename based on the title or part of the URL to avoid using UUID
+        # Clean the title or URL to make it a valid filename (remove special characters)
+        clean_title = re.sub(r'[\\/*?:"<>|]', "", title)[:50]  # Limit length to 50 chars
+        if not clean_title:  # Fallback in case the title is empty or invalid
+            clean_title = os.path.basename(url).split(".pdf")[0]
+
+        filename = f"{clean_title}_{year}.pdf"
         save_path = os.path.join(year_folder, filename)
 
         # Check if the file already exists to avoid re-downloading
@@ -143,6 +148,7 @@ class SpeechDownloader:
             logger.debug(f"Collected metadata: {metadata}")
         else:
             logger.info(f"Speech {filename} already exists. Skipping download.")
+
 
     def save_metadata(self):
         """
@@ -198,7 +204,7 @@ def fetch_with_retries(url, retries=3, delay=5):
 if __name__ == "__main__":
     # Example of usage: Download speeches from 2017 to the present and save to data/pdfs
     logger.info("Starting SpeechDownloader script")
-    downloader = SpeechDownloader(base_folder='../data/pdfs', start_year=2017)
+    downloader = SpeechDownloader(base_folder='../data/pdfs', start_year=2023)
     downloader.download_speeches_parallel()
     downloader.save_metadata()
     logger.info("SpeechDownloader script finished")
