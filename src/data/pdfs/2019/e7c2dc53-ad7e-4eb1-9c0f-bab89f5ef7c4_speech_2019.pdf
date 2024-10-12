@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script>
+            dataLayer = typeof dataLayer === 'undefined' ? [] : dataLayer;
+        </script>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-HLGQ');</script>
+        <!-- End Google Tag Manager -->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta charset="UTF-8">
+
+        <link rel="unapi-server" type="application/xml" title="unAPI" href="/unapi.php" />
+
+        <link rel="stylesheet" type="text/css" href=/assets/dist/bootstrap/dist/css/bootstrap.min.css?1725460885>
+        <link rel="stylesheet" type="text/css" href=/assets/dist/font-awesome/css/font-awesome.min.css?1725460885>
+        <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Rosarivo:400,400italic,700,700italic|Open+Sans:400,400italic,700,700italic">
+        <link rel="stylesheet" type="text/css" href=/assets/css/autoComplete.min.css?1725460885>
+
+                <link rel="stylesheet" type="text/css" href=/assets/css/fraser-styles.css?1725460885>
+        
+
+        <link rel="apple-touch-icon" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/favicons/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/favicons/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/favicons/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/favicons/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/favicons/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/favicon-194x194.png" sizes="194x194">
+<link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+        <title>
+                            Employment Act of 1946 | Title | FRASER | St. Louis Fed
+                    </title>
+
+        
+<script type="application/ld+json">
+{
+    "@context": "http:\/\/schema.org",
+    "@type": "Legislation",
+    "name": "Employment Act of 1946",
+    "url": "https:\/\/fraser.stlouisfed.org\/title\/employment-act-1946-1099",
+    "alternateName": [
+        "An Act to Declare a National Policy on Employment, Production, and Purchasing Power, and for Other Purposes",
+        "Public Law 79-304, 79th Congress, S. 380"
+    ],
+    "description": "Employment Act of 1946, also known as An Act to Declare a National Policy on Employment, Production, and Purchasing Power, and for Other Purposes; Public Law 79-304, 79th Congress, S. 380 by United States. Congress",
+    "keywords": "Law and Legislation, Law and legislation, Labor law",
+    "spatialCoverage": "United States",
+    "datePublished": "February 20, 1946",
+    "encodingFormat": "application\/pdf",
+    "inLanguage": "eng",
+    "sdDatePublished": [
+        "2013-11-26 09:18:06.806674",
+        "2024-03-19 21:18:43"
+    ],
+    "sdpublisher": "Federal Reserve Bank of St. Louis",
+    "author": {
+        "@type": "Organization",
+        "url": "https:\/\/fraser.stlouisfed.org\/author\/united-states-congress",
+        "name": "United States. Congress"
+    }
+}
+</script>
+
+  <meta name="description" content="Employment Act of 1946, also known as An Act to Declare a National Policy on Employment, Production, and Purchasing Power, and for Other Purposes; Public Law 79-304, 79th Congress, S. 380 by United States. Congress">
+  <meta name="DC.description" content="">
+
+  
+      <link rel="canonical" href="" />
+  
+      <meta name="titleInfo" content="Employment Act of 1946">
+  <meta name="citation_title" content="Employment Act of 1946"/>
+  <meta name="DC.title" content="Employment Act of 1946"/>
+    <meta name="titleInfo" content="An Act to Declare a National Policy on Employment, Production, and Purchasing Power, and for Other Purposes">
+  <meta name="citation_title" content="An Act to Declare a National Policy on Employment, Production, and Purchasing Power, and for Other Purposes"/>
+  <meta name="DC.title" content="An Act to Declare a National Policy on Employment, Production, and Purchasing Power, and for Other Purposes"/>
+    <meta name="titleInfo" content="Public Law 79-304, 79th Congress, S. 380">
+  <meta name="citation_title" content="Public Law 79-304, 79th Congress, S. 380"/>
+  <meta name="DC.title" content="Public Law 79-304, 79th Congress, S. 380"/>
+    <meta name="sortTitle" content="Employment Act of 1946">
+  <meta name="dateIssued" content="February 20, 1946">
+  <meta name="sortDate" content="1946-02-20">
+  <meta name="year" content="1946">
+  <meta name="DC.date" content="1946-02-20"/>
+  <meta name="citation_date" content="1946-02-20"/>
+    <meta name="name" content="United States. Congress">
+    <meta name="DC.creator" content="United States. Congress" />
+  <meta name="citation_author" content="United States. Congress" />
+        <meta name="genre" content="legislation">
+  <meta name="DC.type" content="legislation">
+    <meta name="genre" content="government publication">
+  <meta name="DC.type" content="government publication">
+      <meta name="subject" content="Law and legislation">
+  <meta name="DC.subject" content="Law and legislation"/>
+    <meta name="subject" content="Labor law">
+  <meta name="DC.subject" content="Labor law"/>
+      <meta name="subject" content="United States">
+  <meta name="DC.subject" content="United States"/>
+          <meta name="theme" content="Law and Legislation">
+        <meta name="partOf" content="Congressional Documents">
+        <meta name="citation_article_type" content="monographic"/>
+  <meta name="citation_pdf_url" content="https://fraser.stlouisfed.org/files/docs/historical/congressional/employment-act-1946.pdf"/>
+  <meta name="citation_fulltext_html_url" content=""/>
+  <meta name="citation_abstract_html_url" content=""/>
+
+                  
+        
+            </head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-HLGQ"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!--<div id="alert-bar" class="hidden-md hidden-lg">-->
+    <!--<a href="/survey">Take the FRASER mobile experience survey</a>-->
+<!--</div>-->
+
+<div class="container-xl">
+
+    <div id="header" class="row">
+    <div class="col-12 col-sm-12 col-md-7 pb-2 pt-2">
+        <a id="stlfed-link" href="https://www.stlouisfed.org">
+            <img src="https://s3.amazonaws.com/files.fraser.stlouisfed.org/images/StlFedHoriz.svg" width="296" height="14" alt="FRASER logo" class="img-fluid">
+        </a>
+    </div>
+    <div class="col-12 col-sm-12 col-md-7 pb-3 dark-blue-background">
+        <a href="/">
+            <img src="https://s3.amazonaws.com/files.fraser.stlouisfed.org/images/FRASER-20Years_Rev.svg" width="296" height="65" alt="FRASER logo" class="img-fluid">
+        </a>
+    </div>
+    <div class="col-12 col-sm-7 col-md-5 text-right dark-blue-background">
+        <form action="/search.php" id="head-search-form" class="d-none d-lg-block pt-1">
+
+            
+            <div class="input-group">
+                <button id="filter-toggle" type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span id="field-filter">All</span>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <input type="hidden" id="search-filter-param" name="adv_query[0][field]" value="all" />
+                    <input type="hidden" name="adv_query[0][operator]" value="and">
+                                            <li><a class="head-search-filter-option dropdown-item" href="#">All</a></li>
+                                            <li><a class="head-search-filter-option dropdown-item" href="#">Title</a></li>
+                                            <li><a class="head-search-filter-option dropdown-item" href="#">Author</a></li>
+                                            <li><a class="head-search-filter-option dropdown-item" href="#">Subject</a></li>
+                                            <li><a class="head-search-filter-option dropdown-item" href="#">Date</a></li>
+                                            <li><a class="head-search-filter-option dropdown-item" href="#">Full-Text</a></li>
+                                    </ul>
+                <input id="autoComplete" type="text" name="adv_query[0][value]" class="form-control" autocomplete="off">
+                <button type="submit" class="btn btn-default" style="border-radius:0"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--googleoff: snippet-->
+<div class="row navbar-row">
+
+    <nav class="navbar navbar-expand-lg">
+            <div class="nav-search d-block d-lg-none my-2">
+                <form action="/search.php">
+                    <div class="input-group input-group-sm">
+                        <input type="text" name="q" placeholder=" What are you looking for?" class="form-control input-sm">
+                        <button type="submit" class="btn btn-outline-secondary btn-light btn-sm" style=""><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            <button type="button" data-bs-target="#main-nav-wrapper" data-bs-toggle="collapse" class="pull-right hamburger navbar-toggler collapsed fraser-nav-hamburger">
+                <i class="fa fa-bars"></i>
+            </button>
+        <div class="collapse navbar-collapse" id="main-nav-wrapper">
+            <div id="main-nav-inner">
+                <ul class="navbar navbar-nav" id="main-nav">
+                    <li class="dropdown nav-item">
+                        <a href="#" id="explore-link" class="nav-link">
+                            Explore
+                            <i class="d-none d-lg-inline-block fa fa-caret-down"></i><i class="d-lg-none fa fa-plus"></i><i class="d-lg-none fa fa-minus" style="display:none"></i>
+                        </a>
+                        <ul class="dropdown-content">
+                            <li><a href="/education">Educational Resources</a></li>
+                            <li><a href="/archival">Archival Collections</a></li>
+                            <li class="dropdown">
+                                <a href="/theme">
+                                    Themes
+                                    <i class="d-none d-lg-inline-block fa fa-caret-right"></i><i class="d-lg-none fa fa-plus"></i><i class="d-lg-none fa fa-minus" style="display:none"></i>
+                                </a>
+                                <ul class="dropdown-content">
+                                    <li><a href="/theme/economic-data">Economic Data</a></li>
+                                    <li><a href="/federalreserve">Federal Reserve</a></li>
+                                    <li><a href="/theme">View all</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/timeline">Timelines</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown nav-item">
+                        <a href="#" id="browse-link" class="nav-link">
+                            Browse
+                            <i class="d-none d-lg-inline-block fa fa-caret-down"></i><i class="d-lg-none fa fa-plus"></i><i class="d-lg-none fa fa-minus" style="display:none"></i>
+                        </a>
+                        <ul class="dropdown-content">
+                            <li><a href="/title">Titles</a></li>
+                            <li><a href="/author">Authors</a></li>
+                            <li><a href="/subject">Subjects</a></li>
+                            <li><a href="/date">Dates</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown nav-item">
+                        <a href="#" id="about-link" class="nav-link">
+                            About
+                            <i class="d-none d-lg-inline-block fa fa-caret-down"></i><i class="d-lg-none fa fa-plus"></i><i class="d-lg-none fa fa-minus" style="display:none"></i>
+                        </a>
+                        <ul class="dropdown-content">
+                            <li><a href="/about">About FRASER</a></li>
+                            <li><a href="/faq">FAQ</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
+                            <li class="dropdown">
+                                <a href="#" id="api-documentation-link">
+                                    FRASER API
+                                    <i class="d-none d-lg-inline-block fa fa-caret-right"></i><i class="d-lg-none fa fa-plus"></i><i class="d-lg-none fa fa-minus" style="display:none"></i>
+                                </a>
+                                <ul class="dropdown-content">
+                                    <li><a href="/api-documentation/rest-api">REST API</a></li>
+                                    <li><a href="/api-documentation/oai-pmh">OAI-PMH</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="https://fraser.stlouisfed.org/blog" class="nav-link">Inside FRASER Blog</a></li>
+
+                </ul>
+            </div>
+            <div id="right-nav-inner" class="navbar-collapse collapse">
+                <ul class="navbar navbar-nav ms-auto" id="right-nav">
+                    <li class="rightnav nav-item"><a href="/bookmarks" aria-label="Manage Bookmarks"><i class="fa fa-bookmark fa-lg"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<!--googleon: snippet-->
+
+    <div id="content">
+        <div class="row">
+                <!--googleoff: snippet-->
+            <p id="breadcrumbs" class="col-12">
+                <a href="/">Home</a>
+                 &gt; <a href="/title/">Browse by Title</a> &gt; <a href="/title/employment-act-1946-1099">Employment Act of 1946</a>            </p>
+            <!--googleon: snippet-->
+                </div>
+        
+
+<span id='hidden-citation' class='d-none'>
+              	
+	
+	
+		
+									Employment Act of 1946, February 20, 1946.						<span class="citationUrl">https://fraser.stlouisfed.org/title/1099</span>,
+			accessed on October 12, 2024.
+			
+		
+	
+
+    
+</span>
+
+<script>
+  let fileList = JSON.parse('[]');
+
+  // Make iif-dev url be a env variable
+  const pdfViewerOutsideArg = {
+    manifestUrl: "https://iiif.slf.digirati.io/presentation/title/1099",
+    collectionItems: { next: "", previous: ""},
+    itemIdentifier: "1099",
+    type: "title",
+    fileList: fileList
+  };
+</script>
+
+<div id="fraser-pdfviewer-root">
+</div>
+
+<link rel="stylesheet" type="text/css" href=/assets/dist/research/fraser-pdfviewer-js/build/main.css?1725460885>
+<script src=/assets/dist/research/fraser-pdfviewer-js/build/main.js?1725460885></script>
+
+    </div>
+
+        <div class="row" id="footer">
+        <div class="col-lg-4">
+            <ul>
+                <li><h5><strong>FRASER</strong></h5></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/faq">FAQ</a></li>
+                <li><a href="http://research.stlouisfed.org/legal.html">Legal and Privacy</a></li>
+                <li><a href="/api-documentation/rest-api">FRASER API</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-4">
+            <form method="post" class="form-inline newsletter-form">
+                <div>
+                    <div class="fs-5">
+                        <i class="fa fa-envelope-o" style="font-size:1.1em;color:white;"></i>
+                        Subscribe to the FRASER Newsletter:
+                    </div>
+                    <div>
+                        <div class="input-group" style="width:100%">
+                            <input type="text" name="email" placeholder="Email" class="form-control email">
+                            <button type="submit" class="btn btn-default">Subscribe</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-4">
+            <div class="withicons">
+                <ul class="footerfollow">
+                    <li>
+                        <a href="https://twitter.com/FedFRASER" class="no-external-icon">
+                            <img class="twitter-x-logo" src="/images/x-logo/logo-white.png" alt="twitter-x-logo">
+                            @FedFRASER</a>
+                    </li>
+                    <li><a href="/contact"><i class="fa fa-envelope-o" style="font-size:1.1em;color:white;"></i> Contact Us</a></li>
+                    <li>
+                        <a href="//fraser.stlouisfed.org/rss/whatsnew.php"><i class="fa fa-rss"></i></a>
+                        <a href="//fraser.stlouisfed.org/news">What's New </a>
+                    </li>
+                    <li>
+                        <a href="https://fraser.stlouisfed.org/blog/feed"><i class="fa fa-rss"></i></a>
+                        <a href="https://fraser.stlouisfed.org/blog">Inside FRASER </a>
+                    </li>
+                </ul>
+                <br class="clear">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src=/assets/dist/jquery/dist/jquery.min.js?1725460885 type="text/javascript"></script>
+<script src=/assets/js/dist/bookmarks.min.js?1725460885 type="text/javascript"></script>
+<script src=/assets/js/dist/autoComplete.min.js?1725460885 type="text/javascript"></script>
+<script src=/assets/js/dist/autoComplete.config.min.js?1725460885 type="text/javascript"></script>
+<script src=/assets/dist/bootstrap/dist/js/bootstrap.bundle.min.js?1725460885 type="text/javascript"></script>
+<script src=/assets/js/common.min.js?1725460885 type="text/javascript"></script>
+<script src=/assets/dist/jquery.scrollto/jquery.scrollTo.min.js?1725460885 type="text/javascript"></script>
+                                                                                                                                        
+                                                
+
+
+
+<!-- pingdom_uptime_check=uXCPjTUzTxL7ULra -->
+
+</body>
+</html>
