@@ -21,17 +21,20 @@ class SpeechDownloader:
     """
 
     def __init__(self, base_folder, start_year=2017):
+        logger.debug("Initializing SpeechDownloader class")
         self.base_folder = base_folder
         self.start_year = start_year
         self.speech_metadata = []
 
         # Ensure the base folder exists
         create_directory_if_not_exists(self.base_folder)
+        logger.debug(f"Base folder set to: {self.base_folder}")
 
     def download_speeches_parallel(self):
         """
         Main function to download speeches from 2017 to the present in parallel.
         """
+        logger.info("Starting download_speeches_parallel")
         with ThreadPoolExecutor(max_workers=5) as executor:
             current_year = datetime.now().year
             for year in range(self.start_year, current_year + 1):
@@ -44,10 +47,13 @@ class SpeechDownloader:
         """
         Fetches speech page links for a given year from the Federal Reserve website.
         """
+        logger.debug(f"Fetching speech links for year: {year}")
         base_url = f"https://www.federalreserve.gov/newsevents/speech/{year}-speeches.htm"
+        logger.debug(f"Base URL: {base_url}")
         soup = _get_soup_from_url(base_url)
 
         if not soup:
+            logger.warning(f"No content found for year {year}")
             return
 
         # Extract .htm links that point to speech details
@@ -61,40 +67,50 @@ class SpeechDownloader:
         # Visit each speech page to extract the actual PDF links
         for speech_page_url in speech_page_links:
             full_page_url = f"https://www.federalreserve.gov{speech_page_url}"
+            logger.debug(f"Processing speech page URL: {full_page_url}")
             self._fetch_pdf_links_from_speech_page(full_page_url, year, year_folder)
 
     def _fetch_pdf_links_from_speech_page(self, page_url, year, year_folder):
         """
         Fetches PDF links from a specific speech page and downloads them.
         """
+        logger.debug(f"Fetching PDF links from speech page: {page_url}")
         soup = _get_soup_from_url(page_url)
         if not soup:
+            logger.warning(f"No content found for speech page: {page_url}")
             return
 
         # Extract speech title and author for metadata
         title_tag = soup.find('h3', class_='title')
         title = title_tag.get_text(strip=True) if title_tag else "No Title"
+        logger.debug(f"Speech title: {title}")
 
         author_tag = soup.find('p', class_='author')
         author = author_tag.get_text(strip=True) if author_tag else "Unknown Author"
+        logger.debug(f"Speech author: {author}")
 
         # Extract .pdf links from the speech page
         pdf_links = [
             link['href'] for link in soup.find_all('a', href=True) if link['href'].endswith(".pdf")
         ]
 
+        logger.info(f"Found {len(pdf_links)} PDF links on page: {page_url}")
+
         # Download each PDF
         for pdf_url in pdf_links:
             if pdf_url.startswith("/"):
                 pdf_url = f"https://www.federalreserve.gov{pdf_url}"
+            logger.debug(f"Downloading PDF from URL: {pdf_url}")
             self._download_speech_pdf(pdf_url, year, year_folder, title, author)
 
     def _download_speech_pdf(self, url, year, year_folder, title, author):
         """
         Downloads a PDF speech from the given URL and saves it in the specified year folder.
         """
+        logger.debug(f"Downloading speech PDF from URL: {url}")
         response = fetch_with_retries(url)
         if response is None:
+            logger.error(f"Failed to download speech from URL: {url}")
             return
 
         # Extract the filename from the URL
@@ -125,6 +141,7 @@ class SpeechDownloader:
         """
         Saves the metadata of the downloaded speeches as a CSV file.
         """
+        logger.info("Saving metadata to CSV file")
         if self.speech_metadata:
             metadata_df = pd.DataFrame(self.speech_metadata)
             metadata_file = os.path.join(self.base_folder, 'speech_metadata.csv')
@@ -137,9 +154,11 @@ class SpeechDownloader:
 def create_directory_if_not_exists(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
+        logger.debug(f"Created directory: {directory}")
 
 def _get_soup_from_url(url):
     try:
+        logger.debug(f"Getting content from URL: {url}")
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         return BeautifulSoup(response.content, 'html.parser')
@@ -152,6 +171,7 @@ def _get_soup_from_url(url):
 def fetch_with_retries(url, retries=3, delay=5):
     for i in range(retries):
         try:
+            logger.debug(f"Attempt {i+1} to fetch URL: {url}")
             response = requests.get(url, timeout=10)
             response.raise_for_status()
             return response
@@ -163,6 +183,8 @@ def fetch_with_retries(url, retries=3, delay=5):
 
 if __name__ == "__main__":
     # Example of usage: Download speeches from 2017 to the present and save to data/pdfs
+    logger.info("Starting SpeechDownloader script")
     downloader = SpeechDownloader(base_folder='../data/pdfs', start_year=2017)
     downloader.download_speeches_parallel()
     downloader.save_metadata()
+    logger.info("SpeechDownloader script finished")
