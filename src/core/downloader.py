@@ -41,6 +41,7 @@ class SpeechDownloader:
                 year_folder = os.path.join(self.base_folder, str(year))
                 create_directory_if_not_exists(year_folder)
                 logger.info(f"Submitting download tasks for {year}...")
+                # Submit tasks to fetch speeches for each year concurrently
                 executor.submit(self._fetch_speech_links_for_year, year, year_folder)
 
     def _fetch_speech_links_for_year(self, year, year_folder):
@@ -50,6 +51,7 @@ class SpeechDownloader:
         logger.debug(f"Fetching speech links for year: {year}")
         base_url = f"https://www.federalreserve.gov/newsevents/speech/{year}-speeches.htm"
         logger.debug(f"Base URL: {base_url}")
+        # Get the HTML content from the provided URL
         soup = _get_soup_from_url(base_url)
 
         if not soup:
@@ -68,6 +70,7 @@ class SpeechDownloader:
         for speech_page_url in speech_page_links:
             full_page_url = f"https://www.federalreserve.gov{speech_page_url}"
             logger.debug(f"Processing speech page URL: {full_page_url}")
+            # Fetch PDF links from each speech page
             self._fetch_pdf_links_from_speech_page(full_page_url, year, year_folder)
 
     def _fetch_pdf_links_from_speech_page(self, page_url, year, year_folder):
@@ -75,6 +78,7 @@ class SpeechDownloader:
         Fetches PDF links from a specific speech page and downloads them.
         """
         logger.debug(f"Fetching PDF links from speech page: {page_url}")
+        # Get the HTML content from the speech page URL
         soup = _get_soup_from_url(page_url)
         if not soup:
             logger.warning(f"No content found for speech page: {page_url}")
@@ -101,6 +105,7 @@ class SpeechDownloader:
             if pdf_url.startswith("/"):
                 pdf_url = f"https://www.federalreserve.gov{pdf_url}"
             logger.debug(f"Downloading PDF from URL: {pdf_url}")
+            # Download the PDF from the extracted link
             self._download_speech_pdf(pdf_url, year, year_folder, title, author)
 
     def _download_speech_pdf(self, url, year, year_folder, title, author):
@@ -108,21 +113,23 @@ class SpeechDownloader:
         Downloads a PDF speech from the given URL and saves it in the specified year folder.
         """
         logger.debug(f"Downloading speech PDF from URL: {url}")
+        # Use retry mechanism to handle network issues
         response = fetch_with_retries(url)
         if response is None:
             logger.error(f"Failed to download speech from URL: {url}")
             return
 
-        # Extract the filename from the URL
+        # Extract the filename from the URL using UUID to ensure uniqueness
         filename = f"{uuid.uuid4()}_speech_{year}.pdf"
         save_path = os.path.join(year_folder, filename)
 
+        # Check if the file already exists to avoid re-downloading
         if not os.path.exists(save_path):
             with open(save_path, 'wb') as f:
                 f.write(response.content)
             logger.info(f"Downloaded {filename} to {save_path}")
 
-            # Collect metadata
+            # Collect metadata for the downloaded speech
             metadata = {
                 'url': url,
                 'year': year,
@@ -132,7 +139,7 @@ class SpeechDownloader:
             }
             self.speech_metadata.append(metadata)
 
-            # Log metadata for debugging
+            # Log metadata for debugging purposes
             logger.debug(f"Collected metadata: {metadata}")
         else:
             logger.info(f"Speech {filename} already exists. Skipping download.")
@@ -143,8 +150,10 @@ class SpeechDownloader:
         """
         logger.info("Saving metadata to CSV file")
         if self.speech_metadata:
+            # Convert the metadata list to a DataFrame
             metadata_df = pd.DataFrame(self.speech_metadata)
             metadata_file = os.path.join(self.base_folder, 'speech_metadata.csv')
+            # Save the DataFrame to a CSV file
             metadata_df.to_csv(metadata_file, index=False)
             logger.info(f"Metadata saved to {metadata_file}")
         else:
@@ -152,6 +161,7 @@ class SpeechDownloader:
 
 # Helper Functions
 def create_directory_if_not_exists(directory):
+    # Create the directory if it doesn't already exist
     if not os.path.exists(directory):
         os.makedirs(directory)
         logger.debug(f"Created directory: {directory}")
@@ -159,8 +169,10 @@ def create_directory_if_not_exists(directory):
 def _get_soup_from_url(url):
     try:
         logger.debug(f"Getting content from URL: {url}")
+        # Send GET request to the URL with a timeout
         response = requests.get(url, timeout=10)
         response.raise_for_status()
+        # Parse the HTML content using BeautifulSoup
         return BeautifulSoup(response.content, 'html.parser')
     except HTTPError as http_err:
         logger.error(f"HTTP error occurred: {http_err}")
@@ -169,9 +181,11 @@ def _get_soup_from_url(url):
     return None
 
 def fetch_with_retries(url, retries=3, delay=5):
+    # Attempt to fetch the URL with a specified number of retries
     for i in range(retries):
         try:
             logger.debug(f"Attempt {i+1} to fetch URL: {url}")
+            # Send GET request to the URL with a timeout
             response = requests.get(url, timeout=10)
             response.raise_for_status()
             return response
