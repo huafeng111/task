@@ -17,23 +17,28 @@ class SpeechDownloader:
         self.start_year = start_year
         self.speech_metadata = []
 
-        # Make sure the necessary folders exist
-        if not os.path.exists(os.path.join(self.base_folder, 'raw_data')):
-            os.makedirs(os.path.join(self.base_folder, 'raw_data'))
+        # Ensure the base folder exists
+        if not os.path.exists(self.base_folder):
+            os.makedirs(self.base_folder)
 
     def download_speeches(self):
         """
-        Main function to download speeches from 2017 to present.
+        Main function to download speeches from 2017 to the present.
         """
         current_year = datetime.now().year
         for year in range(self.start_year, current_year + 1):
             print(f"Downloading speeches for {year}...")
             try:
-                self._fetch_speech_links_for_year(year)
+                # Ensure directory for the year exists
+                year_folder = os.path.join(self.base_folder, str(year))
+                if not os.path.exists(year_folder):
+                    os.makedirs(year_folder)
+
+                self._fetch_speech_links_for_year(year, year_folder)
             except Exception as e:
                 print(f"Error fetching speeches for {year}: {e}")
 
-    def _fetch_speech_links_for_year(self, year):
+    def _fetch_speech_links_for_year(self, year, year_folder):
         """
         Fetches speech page links for a given year from the Federal Reserve website.
         """
@@ -56,14 +61,14 @@ class SpeechDownloader:
             # Visit each speech page to extract the actual PDF links
             for speech_page_url in speech_page_links:
                 full_page_url = f"https://www.federalreserve.gov{speech_page_url}"
-                self._fetch_pdf_links_from_speech_page(full_page_url, year)
+                self._fetch_pdf_links_from_speech_page(full_page_url, year, year_folder)
 
         except HTTPError as http_err:
             print(f"HTTP error occurred: {http_err}")
         except Exception as err:
             print(f"Other error occurred: {err}")
 
-    def _fetch_pdf_links_from_speech_page(self, page_url, year):
+    def _fetch_pdf_links_from_speech_page(self, page_url, year, year_folder):
         """
         Fetches PDF links from a specific speech page and downloads them.
         """
@@ -82,26 +87,26 @@ class SpeechDownloader:
             for pdf_url in pdf_links:
                 if pdf_url.startswith("/"):
                     pdf_url = f"https://www.federalreserve.gov{pdf_url}"
-                self._download_speech_pdf(pdf_url, year)
+                self._download_speech_pdf(pdf_url, year, year_folder)
 
         except HTTPError as http_err:
             print(f"HTTP error occurred while fetching PDF links from {page_url}: {http_err}")
         except Exception as err:
             print(f"Other error occurred: {err}")
 
-    def _download_speech_pdf(self, url, year):
+    def _download_speech_pdf(self, url, year, year_folder):
         """
-        Downloads a PDF speech from the given URL and saves it in the specified folder.
+        Downloads a PDF speech from the given URL and saves it in the specified year folder.
         """
         try:
             response = requests.get(url)
             response.raise_for_status()
 
-            # Extract date and title from the URL
+            # Extract the filename from the URL
             filename = url.split('/')[-1]
             speech_date_match = re.search(r'\d{8}', filename)
             speech_date = speech_date_match.group() if speech_date_match else "unknown_date"
-            save_path = os.path.join(self.base_folder, f'raw_data/speech_{speech_date}.pdf')
+            save_path = os.path.join(year_folder, f'speech_{speech_date}.pdf')
 
             if not os.path.exists(save_path):
                 with open(save_path, 'wb') as f:
@@ -138,7 +143,7 @@ class SpeechDownloader:
             print("No metadata to save.")
 
 if __name__ == "__main__":
-    # Example of usage
-    downloader = SpeechDownloader(base_folder='./data/Fed', start_year=2017)
+    # Example of usage: Download speeches from 2017 to the present and save to data/pdfs
+    downloader = SpeechDownloader(base_folder='../data/pdfs', start_year=2017)
     downloader.download_speeches()
     downloader.save_metadata()
