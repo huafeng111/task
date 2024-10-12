@@ -9,6 +9,7 @@ from datetime import datetime
 from requests.exceptions import HTTPError
 from concurrent.futures import ThreadPoolExecutor
 from SpeechUpdater import SpeechUpdater  # 导入更新模块
+from threading import Lock  # 用于线程安全
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -24,6 +25,9 @@ class SpeechDownloader:
         self.base_folder = base_folder
         self.start_year = start_year
         self.speech_metadata = []
+        self.downloaded_files = set()  # 用于记录已下载的文件，防止重复下载
+        self.processed_urls = set()    # 记录已经处理过的 PDF URL
+        self.lock = Lock()  # 线程锁，确保线程安全
 
         # Ensure the base folder exists
         create_directory_if_not_exists(self.base_folder)
@@ -73,6 +77,13 @@ class SpeechDownloader:
         for pdf_url in pdf_links:
             if pdf_url.startswith("/"):
                 pdf_url = f"https://www.federalreserve.gov{pdf_url}"
+
+            # 防止重复处理同一个 PDF URL，使用锁保证线程安全
+            with self.lock:
+                if pdf_url in self.processed_urls:
+                    continue  # 如果已经处理过，直接跳过
+                self.processed_urls.add(pdf_url)
+
             self._download_speech_pdf(pdf_url, year, year_folder, title, author, date)
 
     def _download_speech_pdf(self, url, year, year_folder, title, author, date):
@@ -87,6 +98,14 @@ class SpeechDownloader:
         filename = f"{clean_title}_{year}.pdf"
         save_path = os.path.join(year_folder, filename)
 
+        with self.lock:
+            # 线程安全检查，防止多个线程同时下载同一个文件
+            if save_path in self.downloaded_files:
+                logger.info(f"Speech {filename} already exists. Skipping download.")
+                return
+            self.downloaded_files.add(save_path)
+
+        # 如果文件不存在，则下载并保存
         if not os.path.exists(save_path):
             with open(save_path, 'wb') as f:
                 f.write(response.content)
