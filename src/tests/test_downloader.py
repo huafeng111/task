@@ -1,5 +1,4 @@
 import sys
-print(sys.path)
 import asyncio
 import sys
 import os

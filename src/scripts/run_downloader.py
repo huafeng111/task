@@ -1,6 +1,7 @@
 import asyncio
-from core.downloader import fetch_and_save_speeches
-from utils.logger import get_logger
+
+from downloader import fetch_and_save_speeches
+from logger import get_logger
 
 logger = get_logger(__name__)
 

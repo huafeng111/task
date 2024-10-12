@@ -1,7 +1,7 @@
 from fpdf import FPDF
 import os
-from config.config import PDF_DIR
-from utils.logger import get_logger
+from config import PDF_DIR
+from logger import get_logger
 
 logger = get_logger(__name__)
 
