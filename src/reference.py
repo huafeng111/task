@@ -14,7 +14,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_community.document_loaders import PyPDFLoader
 
 # A mapping of full Fed member name and title
-root_dir = 'data_gather/fed_speech_downloader'  #fill this in with your root directory
+root_dir = '/data_gather/fed_speech_downloader'#fill this in with your root directory
 NAME_LIST = pd.read_csv(os.path.join(root_dir, 'data/Fed/name_list.csv')).name.to_list()
 DATE_FORMAT = '%Y%m%d'
 DATA_DIR = os.path.join(root_dir, 'data/Fed')
@@ -320,22 +320,14 @@ def fed_reserve_update(df, new_urls, metadatas):
             # metadatas
             metadata = {}
             metadata['speaker'] = speaker
-            metadata['speaker_type'] = 'governor'
-
-            # 修复此处的问题
-            title_element = link.find('em')  # 获取em标签
-            if title_element:  # 如果找到了em标签
-                metadata['speech_title'] = title_element.text
-            else:
-                metadata['speech_title'] = "No Title Found"  # 如果没有em标签，默认值
-
+            metadata['speaker_type'] = 'govenor'
+            metadata['speech_title'] = link.find('em').text
             metadata['date'] = datetime.strftime(date, DATE_FORMAT)
             metadata['timestamp'] = int(date.timestamp())
             metadata['source'] = url
             metadatas.append(metadata)
 
     return df, new_urls, metadatas
-
 
 
 def press_update(df, new_urls, metadatas, base_folder=DATA_DIR):
@@ -449,47 +441,3 @@ def update_docs():
                     added_docs.append(doc)
 
     return df, added_urls, added_docs
-
-# 定义main函数
-def main():
-    # 设置根目录和数据存储路径
-    root_dir = 'data_gather/fed_speech_downloader'
-    base_folder = os.path.join(root_dir, 'data/Fed')
-
-    # 打印开始时间
-    print(f"Starting update process at {datetime.now()}...")
-
-    # 检查数据目录是否存在，如果不存在则创建
-    if not os.path.exists(base_folder):
-        os.makedirs(base_folder)
-
-    # 检查是否存在 urls.csv 和 index.csv 文件，如果不存在则创建空的
-    urls_path = os.path.join(base_folder, 'urls.csv')
-    index_path = os.path.join(base_folder, 'index.csv')
-
-    if not os.path.exists(urls_path):
-        with open(urls_path, 'w') as f:
-            f.write("url\n")
-
-    if not os.path.exists(index_path):
-        df_empty = pd.DataFrame(columns=NAME_LIST)
-        df_empty.to_csv(index_path, index=True)
-
-    # 调用 update_docs 函数，更新演讲数据
-    df, added_urls, added_docs = update_docs()
-
-    # 打印新增加的演讲数量
-    print(f"New speeches added: {len(added_urls)}")
-
-    # 保存最新的index文件
-    df.to_csv(index_path)
-
-    # 保存更新后的urls
-    pd.DataFrame(added_urls, columns=['url']).to_csv(urls_path, index=False)
-
-    # 打印结束时间
-    print(f"Update process completed at {datetime.now()}.")
-
-# 调用main函数
-if __name__ == "__main__":
-    main()

@@ -1,0 +1,3 @@
+2024-10-12 21:18:51,104 - __main__ - INFO - Starting speech download test...
+2024-10-12 21:18:53,471 - downloader - INFO - Saved PDF: speech_0.pdf
+2024-10-12 21:18:53,475 - __main__ - INFO - Download successful. Files saved: ['speech_0.pdf']
