@@ -25,11 +25,18 @@ class SpeechDownloader:
         self.base_folder = base_folder
         self.start_year = start_year
         self.speech_metadata = []
-        self.downloaded_files = set()  # 用于记录已下载的文件，防止重复下载
-        self.lock = Lock()  # 线程锁，确保线程安全
+        self.downloaded_files = set()
+        self.lock = Lock()
 
         # Ensure the base folder exists
         create_directory_if_not_exists(self.base_folder)
+
+        # Initialize downloaded_files with existing files
+        for root, dirs, files in os.walk(self.base_folder):
+            for file in files:
+                if file.endswith('.pdf'):
+                    self.downloaded_files.add(os.path.join(root, file))
+
 
     def download_speeches_parallel(self):
         logger.info("Starting download_speeches_parallel")
@@ -111,15 +118,18 @@ class SpeechDownloader:
             with open(save_path, 'wb') as f:
                 f.write(response.content)
 
-            metadata = {
-                'url': url,
-                'year': year,
-                'title': title,
-                'author': author,
-                'date': date,
-                'file_path': save_path,
-            }
+        metadata = {
+            'url': url,
+            'year': year,
+            'title': title,
+            'author': author,
+            'date': date,
+            'file_path': save_path,
+        }
+
+        with self.lock:
             self.speech_metadata.append(metadata)
+
 
 
     def save_metadata(self):
@@ -156,7 +166,7 @@ def fetch_with_retries(url, retries=3, delay=5):
             logger.warning(f"Attempt {i+1} failed for {url}: {e}. Retrying in {delay} seconds...")
             time.sleep(delay)
     return None
-
+#New Year’s Resolutions for Bank Regulatory Policymakers,Governor Mich
 if __name__ == "__main__":
     logger.info("Starting SpeechDownloader script")
     downloader = SpeechDownloader(base_folder='./data/pdfs', start_year=2024)
