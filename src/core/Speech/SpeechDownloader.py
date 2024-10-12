@@ -84,14 +84,20 @@ class SpeechDownloader:
             logger.warning(f"No content found for speech page: {page_url}")
             return
 
-        # Extract speech title and author for metadata
+        # Extract speech title for metadata
         title_tag = soup.find('h3', class_='title')
-        title = title_tag.get_text(strip=True) if title_tag else "No Title"
+        title = title_tag.find('em').get_text(strip=True) if title_tag and title_tag.find('em') else "No Title"
         logger.debug(f"Speech title: {title}")
 
-        author_tag = soup.find('p', class_='author')
+        # Extract author for metadata
+        author_tag = soup.find('p', class_='speaker')
         author = author_tag.get_text(strip=True) if author_tag else "Unknown Author"
         logger.debug(f"Speech author: {author}")
+
+        # Extract date for metadata
+        date_tag = soup.find('p', class_='article__time')
+        date = date_tag.get_text(strip=True) if date_tag else "Unknown Date"
+        logger.debug(f"Speech date: {date}")
 
         # Extract .pdf links from the speech page
         pdf_links = [
@@ -106,9 +112,9 @@ class SpeechDownloader:
                 pdf_url = f"https://www.federalreserve.gov{pdf_url}"
             logger.debug(f"Downloading PDF from URL: {pdf_url}")
             # Download the PDF from the extracted link
-            self._download_speech_pdf(pdf_url, year, year_folder, title, author)
+            self._download_speech_pdf(pdf_url, year, year_folder, title, author, date)
 
-    def _download_speech_pdf(self, url, year, year_folder, title, author):
+    def _download_speech_pdf(self, url, year, year_folder, title, author, date):
         """
         Downloads a PDF speech from the given URL and saves it in the specified year folder.
         """
@@ -140,6 +146,7 @@ class SpeechDownloader:
                 'year': year,
                 'title': title,
                 'author': author,
+                'date': date,
                 'file_path': save_path,
             }
             self.speech_metadata.append(metadata)
@@ -204,7 +211,7 @@ def fetch_with_retries(url, retries=3, delay=5):
 if __name__ == "__main__":
     # Example of usage: Download speeches from 2017 to the present and save to data/pdfs
     logger.info("Starting SpeechDownloader script")
-    downloader = SpeechDownloader(base_folder='../data/pdfs', start_year=2023)
+    downloader = SpeechDownloader(base_folder='../data/pdfs', start_year=2024)
     downloader.download_speeches_parallel()
     downloader.save_metadata()
     logger.info("SpeechDownloader script finished")
