@@ -320,14 +320,22 @@ def fed_reserve_update(df, new_urls, metadatas):
             # metadatas
             metadata = {}
             metadata['speaker'] = speaker
-            metadata['speaker_type'] = 'govenor'
-            metadata['speech_title'] = link.find('em').text
+            metadata['speaker_type'] = 'governor'
+
+            # 修复此处的问题
+            title_element = link.find('em')  # 获取em标签
+            if title_element:  # 如果找到了em标签
+                metadata['speech_title'] = title_element.text
+            else:
+                metadata['speech_title'] = "No Title Found"  # 如果没有em标签，默认值
+
             metadata['date'] = datetime.strftime(date, DATE_FORMAT)
             metadata['timestamp'] = int(date.timestamp())
             metadata['source'] = url
             metadatas.append(metadata)
 
     return df, new_urls, metadatas
+
 
 
 def press_update(df, new_urls, metadatas, base_folder=DATA_DIR):
