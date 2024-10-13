@@ -199,11 +199,20 @@ class SpeechDownloader:
         # Sort metadata by 'date' before saving (assume 'date' is in 'YYYY-MM-DD' format)
         self.speech_metadata.sort(key=lambda x: x['date'])
 
-        # Use SpeechUpdater to update and save metadata after sorting
+        # Deduplicate metadata by 'title'
+        seen_titles = set()
+        unique_metadata = []
+        for item in self.speech_metadata:
+            if item['title'] not in seen_titles:
+                unique_metadata.append(item)
+                seen_titles.add(item['title'])
+
+        # Use SpeechUpdater to update and save metadata after sorting and deduplication
         metadata_file = os.path.join(self.base_folder, 'speech_metadata.csv')
         backup_folder = os.path.join(self.base_folder, 'backup_metadata')
         updater = SpeechUpdater(metadata_file=metadata_file, backup_folder=backup_folder)
-        updater.update(self.speech_metadata)
+        updater.update(unique_metadata)
+
 
     @staticmethod
     def format_date(date_str):

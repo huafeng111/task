@@ -86,7 +86,7 @@ class PDFHandler:
     def process_all_pdfs(self, output_file):
         # Load existing metadata (if available)
         all_metadata = self.load_existing_metadata(output_file)
-        existing_pdf_paths = {entry['csv_metadata']['file_path'] for entry in all_metadata}
+        existing_pdf_paths = {entry.get('csv_metadata', {}).get('file_path', '') for entry in all_metadata}
 
         # Process all PDFs listed in the CSV file
         for index, row in self.csv_data.iterrows():
@@ -103,12 +103,14 @@ class PDFHandler:
             if pdf_data:
                 # Get additional metadata from CSV
                 csv_metadata = row.to_dict()  # Directly use the row as CSV metadata
+                title = csv_metadata.pop('title')  # Extract title and remove it from csv_metadata
 
                 # Combine both PDF metadata and CSV metadata
                 combined_metadata = {
+                    "title": title,  # Place title as a top-level key
                     "pdf_metadata": pdf_data['metadata'],
                     "pages": pdf_data['pages'],
-                    "csv_metadata": csv_metadata
+                    "csv_metadata": csv_metadata  # Other CSV data remains in csv_metadata
                 }
 
                 # Add the combined metadata to the list
