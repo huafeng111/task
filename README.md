@@ -26,7 +26,7 @@ This Python class is responsible for managing the process of downloading PDF fil
   "last_year": 2024
 }
 
-
+```
 ## 3. Configuration (`config.py`)
 
 The project provides a configuration file that allows you to set parameters to control the behavior of the PDF downloader.
