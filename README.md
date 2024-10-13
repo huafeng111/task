@@ -39,8 +39,11 @@ The `pdfHandler` module is responsible for converting the content of the downloa
 
 - **PDF Content to Metadata Conversion**: Extracts information from the PDF files and stores it as metadata.
 
+## 3. `src/api/FetchSpeechData.py`
 
-## 3. `download_state.json`
+The `get_pdf_by_title` function in `FetchSpeechData.py` allows you to retrieve and parse the PDF metadata from MongoDB based on the PDF title, converting it back into a downloadable PDF.
+
+## 4. `download_state.json`
 
 - This file records the pointer from the last scraping session, allowing the scraper to continue from where it left off.
 - It tracks the last successfully processed year and ensures that duplicate downloads are avoided.
@@ -53,7 +56,7 @@ The `pdfHandler` module is responsible for converting the content of the downloa
 }
 
 ```
-## 4. Configuration (`config.py`)
+## 5. Configuration (`config.py`)
 
 The project provides a configuration file that allows you to set parameters to control the behavior of the PDF downloader.
 
