@@ -1,11 +1,10 @@
 import importlib
 import os
-
 import re
 import logging
 import sys
 import time
-
+import json
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 from logging.handlers import RotatingFileHandler
@@ -51,6 +50,8 @@ class SpeechDownloader:
     It will attempt to download speeches from the specified start year to the present, retrying failed downloads.
     """
 
+    STATE_FILE = os.path.join(config.PDF_DIR, 'download_state.json')
+
     def __init__(self, base_folder=config.PDF_DIR, start_year=config.START_YEAR):
         self.base_folder = base_folder
         self.start_year = start_year
@@ -67,17 +68,43 @@ class SpeechDownloader:
                 if file.endswith('.pdf'):
                     self.downloaded_files.add(os.path.join(root, file))
 
+        # Load the last download state
+        self.last_year = self.load_last_year()
+
+    def load_last_year(self):
+        """
+        Load the last downloaded year from the state file.
+        If the file does not exist, return the start_year from the config.
+        """
+        if os.path.exists(self.STATE_FILE):
+            try:
+                with open(self.STATE_FILE, 'r') as f:
+                    state = json.load(f)
+                    return state.get('last_year', self.start_year)
+            except json.JSONDecodeError:
+                logger.error("Failed to decode state file. Starting from configured start_year.")
+                return self.start_year
+        return self.start_year
+
+    def save_last_year(self, year):
+        """
+        Save the last successfully downloaded year to the state file.
+        """
+        with open(self.STATE_FILE, 'w') as f:
+            json.dump({'last_year': year}, f)
+
     def download_speeches_parallel(self):
         logger.info("Starting download_speeches_parallel")
         with ThreadPoolExecutor(max_workers=config.MAX_WORKERS) as executor:
             current_year = datetime.now().year
-            years = range(self.start_year, current_year + 1)
+            years = range(self.last_year, current_year + 1)  # Start from the last downloaded year
             with tqdm(total=len(years)) as pbar:
                 for year in years:
                     year_folder = os.path.join(self.base_folder, str(year))
                     create_directory_if_not_exists(year_folder)
                     executor.submit(self._process_year, year, year_folder)
                     pbar.update(1)
+                    self.save_last_year(year)  # Save the progress after processing each year
 
     def _process_year(self, year, year_folder):
         speech_page_links = SpeechParser.fetch_speech_links_for_year(year)
@@ -164,11 +191,16 @@ class SpeechDownloader:
 
     def save_metadata(self):
         logger.info("Saving metadata using updater...")
-        # Use SpeechUpdater to update and save metadata
+
+        # Sort metadata by 'date' before saving (assume 'date' is in 'YYYY-MM-DD' format)
+        self.speech_metadata.sort(key=lambda x: x['date'])
+
+        # Use SpeechUpdater to update and save metadata after sorting
         metadata_file = os.path.join(self.base_folder, 'speech_metadata.csv')
         backup_folder = os.path.join(self.base_folder, 'backup_metadata')
         updater = SpeechUpdater(metadata_file=metadata_file, backup_folder=backup_folder)
         updater.update(self.speech_metadata)
+
 
 
 # Helper Functions
