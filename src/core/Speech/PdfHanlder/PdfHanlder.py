@@ -145,7 +145,7 @@ class PDFHandler:
 
 if __name__ == "__main__":
     csv_relative_path = "../../../data/pdfs/speech_metadata.csv"  # Adjust the relative path based on your directory structure
-    output_metadata_file = "all_metadata_and_text.json"  # Output JSON file to store all metadata
+    output_metadata_file = "./UploadDb/all_metadata_and_text.json"  # Output JSON file to store all metadata
 
     handler = PDFHandler(csv_relative_path)
 
