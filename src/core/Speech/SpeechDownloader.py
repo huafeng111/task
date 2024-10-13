@@ -22,12 +22,13 @@ def dynamic_import(module_name, module_path):
     spec.loader.exec_module(module)
     return module
 
-# Assuming the absolute path to config.py
+# Assuming the relative path to config.py from the current script
 config_module_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "config", "config.py")
 config = dynamic_import("config", config_module_path)
-print("config is", config)
+
+
 # Configure logging to file and console
-log_filename = config.LOG_FILE
+log_filename = os.path.join(os.path.dirname(__file__), config.LOG_FILE)  # Use relative path for log file
 handler = RotatingFileHandler(log_filename, maxBytes=config.LOG_MAX_BYTES,
                               backupCount=config.LOG_BACKUP_COUNT)  # Max file size 5MB, keep 3 backups
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -50,10 +51,10 @@ class SpeechDownloader:
     It will attempt to download speeches from the specified start year to the present, retrying failed downloads.
     """
 
-    STATE_FILE = os.path.join(config.PDF_DIR, 'download_state.json')
+    STATE_FILE = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs', 'download_state.json')
 
-    def __init__(self, base_folder=config.PDF_DIR, start_year=config.START_YEAR):
-        self.base_folder = base_folder
+    def __init__(self, base_folder=os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs'), start_year=config.START_YEAR):
+        self.base_folder = os.path.abspath(base_folder)
         self.start_year = start_year
         self.speech_metadata = []
         self.downloaded_files = set()
@@ -153,10 +154,10 @@ class SpeechDownloader:
                 filename = f"{clean_title}_{year}.pdf"
 
                 # Concatenate absolute path
-                absolute_save_path = os.path.join(self.base_folder, str(year), filename)
+                absolute_save_path = os.path.join(year_folder, filename)
 
                 # Keep the relative path relative to base_folder
-                save_path = absolute_save_path.replace(os.path.abspath(self.base_folder), '').lstrip(os.sep)
+                save_path = os.path.relpath(absolute_save_path, self.base_folder)
 
                 with self.lock:
                     if save_path in self.downloaded_files:
@@ -227,7 +228,7 @@ def create_directory_if_not_exists(directory):
 
 if __name__ == "__main__":
     logger.info("Starting SpeechDownloader script")
-    downloader = SpeechDownloader(base_folder=config.PDF_DIR, start_year=config.START_YEAR)
+    downloader = SpeechDownloader(base_folder=os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs'), start_year=config.START_YEAR)
     downloader.download_speeches_parallel()
     downloader.save_metadata()
     logger.info("SpeechDownloader script finished")
