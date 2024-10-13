@@ -1,6 +1,10 @@
+import importlib
 import os
+
 import re
 import logging
+import sys
+
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 from logging.handlers import RotatingFileHandler
@@ -9,10 +13,20 @@ from tqdm import tqdm
 
 from SpeechUpdater import SpeechUpdater  # Import the updater module
 import SpeechParser  # Import the parser module
+def dynamic_import(module_name, module_path):
+    spec = importlib.util.spec_from_file_location(module_name, module_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+# 假设 config.py 的绝对路径
+config_module_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "config", "config.py")
+config = dynamic_import("config", config_module_path)
 
 # Configure logging to file and console
-log_filename = 'speech_downloader.log'
-handler = RotatingFileHandler(log_filename, maxBytes=5 * 1024 * 1024, backupCount=3)  # 每个文件最大5MB，保留3个备份
+log_filename = config.LOG_FILE
+handler = RotatingFileHandler(log_filename, maxBytes=config.LOG_MAX_BYTES,
+                              backupCount=config.LOG_BACKUP_COUNT)  # 每个文件最大5MB，保留3个备份
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
 # 设置处理器和格式器
@@ -33,7 +47,7 @@ class SpeechDownloader:
     It will attempt to download speeches from the specified start year to the present, retrying failed downloads.
     """
 
-    def __init__(self, base_folder, start_year=2017):
+    def __init__(self, base_folder=config.PDF_DIR, start_year=config.START_YEAR):
         self.base_folder = base_folder
         self.start_year = start_year
         self.speech_metadata = []
@@ -51,7 +65,7 @@ class SpeechDownloader:
 
     def download_speeches_parallel(self):
         logger.info("Starting download_speeches_parallel")
-        with ThreadPoolExecutor(max_workers=5) as executor:
+        with ThreadPoolExecutor(max_workers=config.MAX_WORKERS) as executor:
             current_year = datetime.now().year
             years = range(self.start_year, current_year + 1)
             with tqdm(total=len(years)) as pbar:
@@ -133,7 +147,7 @@ def create_directory_if_not_exists(directory):
 
 if __name__ == "__main__":
     logger.info("Starting SpeechDownloader script")
-    downloader = SpeechDownloader(base_folder='./data/pdfs', start_year=2017)
+    downloader = SpeechDownloader(base_folder=config.PDF_DIR, start_year=config.START_YEAR)
     downloader.download_speeches_parallel()
     downloader.save_metadata()
     logger.info("SpeechDownloader script finished")
