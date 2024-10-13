@@ -25,7 +25,7 @@ def dynamic_import(module_name, module_path):
 # Assuming the absolute path to config.py
 config_module_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "config", "config.py")
 config = dynamic_import("config", config_module_path)
-
+print("config is", config)
 # Configure logging to file and console
 log_filename = config.LOG_FILE
 handler = RotatingFileHandler(log_filename, maxBytes=config.LOG_MAX_BYTES,

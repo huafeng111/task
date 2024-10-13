@@ -60,6 +60,20 @@ class PDFHandler:
             print(f"Error fetching CSV metadata: {e}")
             return None
 
+    def load_existing_metadata(self, output_file):
+        # Load existing metadata if the file exists
+        if os.path.exists(output_file):
+            try:
+                with open(output_file, 'r', encoding='utf-8') as f:
+                    all_metadata = json.load(f)
+                print(f"Existing metadata loaded from {output_file}")
+                return all_metadata
+            except Exception as e:
+                print(f"Error loading existing metadata: {e}")
+                return []
+        else:
+            return []
+
     def save_all_metadata(self, all_metadata, output_file):
         # Save all extracted metadata and text to a single JSON file
         try:
@@ -70,11 +84,19 @@ class PDFHandler:
             print(f"Failed to save all metadata: {e}")
 
     def process_all_pdfs(self, output_file):
-        # Process all PDFs listed in the CSV file and save to one JSON file
-        all_metadata = []  # List to store metadata for all PDFs
+        # Load existing metadata (if available)
+        all_metadata = self.load_existing_metadata(output_file)
+        existing_pdf_paths = {entry['csv_metadata']['file_path'] for entry in all_metadata}
 
+        # Process all PDFs listed in the CSV file
         for index, row in self.csv_data.iterrows():
             relative_pdf_path = row['file_path']
+
+            # Check if the PDF is already processed and in the metadata
+            if relative_pdf_path in existing_pdf_paths:
+                print(f"Skipping already processed PDF: {relative_pdf_path}")
+                continue
+
             # Extract metadata from the PDF
             pdf_data = self.extract_pdf_metadata(relative_pdf_path)
 
@@ -92,9 +114,32 @@ class PDFHandler:
                 # Add the combined metadata to the list
                 all_metadata.append(combined_metadata)
 
-        # Save all metadata to a single JSON file
+        # Save all metadata (newly processed + previously existing) to a single JSON file
         self.save_all_metadata(all_metadata, output_file)
 
+    def validate_pdfs_in_json(self, json_file_path):
+        """Compare CSV file paths with JSON file paths to ensure all PDFs are processed."""
+        # Extract all PDF file paths from the CSV
+        csv_pdf_paths = self.csv_data['file_path'].tolist()
+
+        # Load JSON data
+        if not os.path.exists(json_file_path):
+            print(f"JSON file not found: {json_file_path}")
+            return
+
+        with open(json_file_path, 'r', encoding='utf-8') as f:
+            json_data = json.load(f)
+
+        # Extract the file paths from the csv_metadata for each entry in the JSON
+        json_pdf_paths = [entry['csv_metadata']['file_path'] for entry in json_data]
+
+        # Find PDFs in CSV that are missing in the JSON file
+        missing_pdfs = [pdf for pdf in csv_pdf_paths if pdf not in json_pdf_paths]
+
+        if not missing_pdfs:
+            print("Validation successful: All PDFs in the CSV are present in the JSON.")
+        else:
+            print(f"Validation failed: The following PDFs are missing in the JSON:\n{missing_pdfs}")
 
 if __name__ == "__main__":
     csv_relative_path = "../../../data/pdfs/speech_metadata.csv"  # Adjust the relative path based on your directory structure
@@ -104,3 +149,6 @@ if __name__ == "__main__":
 
     # Process all PDFs listed in the CSV and save their metadata into one JSON file
     handler.process_all_pdfs(output_metadata_file)
+
+    # Validate that all PDFs in the CSV are present in the generated JSON
+    handler.validate_pdfs_in_json(output_metadata_file)
