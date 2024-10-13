@@ -1,3 +1,20 @@
+# How to Run the Project
+
+### 1. Install Required Dependencies
+
+Ensure you have Python 3.12 installed. Then, install the required dependencies by running the following command:
+
+```bash
+pip install -r requirements.txt
+
+### 2. Start the Project
+
+Once the dependencies are installed, you can start the project using `uvicorn`. Use the following command:
+
+```bash
+uvicorn app:app --host 0.0.0.0 --port 5000 --reload
+
+
 # Configuration and Notes
 
 This project is designed to download PDF files using a web scraper. Below are the key configurations and important notes for using the project.
