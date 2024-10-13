@@ -9,7 +9,8 @@ def get_env_variable(var_name, default_value=None):
     return os.environ.get(var_name, default_value)
 
 # Logging configuration
-LOG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'speech_downloader.log')
+LOG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'log')  # Create 'log' directory inside src
+LOG_FILE = os.path.join(LOG_DIR, 'speech_downloader.log')  # Path to the log file
 LOG_MAX_BYTES = 5 * 1024 * 1024  # 5 MB per log file
 LOG_BACKUP_COUNT = 3  # Keep 3 backups
 
@@ -29,3 +30,4 @@ PDF_DIR = os.path.join(DATA_DIR, 'pdfs')  # Create the 'pdfs' directory inside t
 # Download configuration
 START_YEAR = 2017
 MAX_WORKERS = 5
+
