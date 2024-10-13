@@ -44,7 +44,6 @@ logger.setLevel(logging.INFO)
 logger.addHandler(handler)
 logger.addHandler(console_handler)
 
-
 class SpeechDownloader:
     """
     This class is responsible for downloading Federal Reserve speeches and saving them locally.
@@ -95,38 +94,47 @@ class SpeechDownloader:
             json.dump({'last_year': year}, f)
 
     def download_speeches_parallel(self):
-        logger.info("Starting download_speeches_parallel")
-        with ThreadPoolExecutor(max_workers=config.MAX_WORKERS) as executor:
-            current_year = datetime.now().year
-            years = range(self.last_year, current_year + 1)  # Start from the last downloaded year
-            with tqdm(total=len(years)) as pbar:
-                for year in years:
-                    year_folder = os.path.join(self.base_folder, str(year))
-                    create_directory_if_not_exists(year_folder)
-                    executor.submit(self._process_year, year, year_folder)
-                    pbar.update(1)
-                    self.save_last_year(year)  # Save the progress after processing each year
+        try:
+            logger.info("Starting download_speeches_parallel")
+            with ThreadPoolExecutor(max_workers=config.MAX_WORKERS) as executor:
+                current_year = datetime.now().year
+                years = range(self.last_year, current_year + 1)  # Start from the last downloaded year
+                with tqdm(total=len(years)) as pbar:
+                    for year in years:
+                        year_folder = os.path.join(self.base_folder, str(year))
+                        create_directory_if_not_exists(year_folder)
+                        executor.submit(self._process_year, year, year_folder)
+                        pbar.update(1)
+                        self.save_last_year(year)  # Save the progress after processing each year
+        except Exception as e:
+            logger.error(f"Unexpected error during parallel speech download: {e}", exc_info=True)
 
     def _process_year(self, year, year_folder):
-        speech_page_links = SpeechParser.fetch_speech_links_for_year(year)
-        for speech_page_url in speech_page_links:
-            full_page_url = f"https://www.federalreserve.gov{speech_page_url}"
-            self._process_speech_page(full_page_url, year, year_folder)
+        try:
+            speech_page_links = SpeechParser.fetch_speech_links_for_year(year)
+            for speech_page_url in speech_page_links:
+                full_page_url = f"https://www.federalreserve.gov{speech_page_url}"
+                self._process_speech_page(full_page_url, year, year_folder)
+        except Exception as e:
+            logger.error(f"Error processing year {year}: {e}", exc_info=True)
 
     def _process_speech_page(self, page_url, year, year_folder):
-        pdf_links, title, author, date = SpeechParser.fetch_pdf_links_from_speech_page(page_url)
-        if not pdf_links:
-            logger.info(f"No PDF links found for page: {page_url}")
-            return
+        try:
+            pdf_links, title, author, date = SpeechParser.fetch_pdf_links_from_speech_page(page_url)
+            if not pdf_links:
+                logger.info(f"No PDF links found for page: {page_url}")
+                return
 
-        # Format the date to 'YYYY-MM-DD' from 'December 05, 2023'
-        date = self.format_date(date)
+            # Format the date to 'YYYY-MM-DD' from 'December 05, 2023'
+            date = self.format_date(date)
 
-        # Download matching PDF files
-        for pdf_url in pdf_links:
-            if pdf_url.startswith("/"):
-                pdf_url = f"https://www.federalreserve.gov{pdf_url}"
-            self._download_speech_pdf(pdf_url, year, year_folder, title, author, date)
+            # Download matching PDF files
+            for pdf_url in pdf_links:
+                if pdf_url.startswith("/"):
+                    pdf_url = f"https://www.federalreserve.gov{pdf_url}"
+                self._download_speech_pdf(pdf_url, year, year_folder, title, author, date)
+        except Exception as e:
+            logger.error(f"Error processing speech page {page_url}: {e}", exc_info=True)
 
     def _download_speech_pdf(self, url, year, year_folder, title, author, date, retries=3, delay=5):
         """
@@ -194,25 +202,27 @@ class SpeechDownloader:
                     logger.error(f"Failed to download PDF after {retries} attempts: {url}")
 
     def save_metadata(self):
-        logger.info("Saving metadata using updater...")
+        try:
+            logger.info("Saving metadata using updater...")
 
-        # Sort metadata by 'date' before saving (assume 'date' is in 'YYYY-MM-DD' format)
-        self.speech_metadata.sort(key=lambda x: x['date'])
+            # Sort metadata by 'date' before saving (assume 'date' is in 'YYYY-MM-DD' format)
+            self.speech_metadata.sort(key=lambda x: x['date'])
 
-        # Deduplicate metadata by 'title'
-        seen_titles = set()
-        unique_metadata = []
-        for item in self.speech_metadata:
-            if item['title'] not in seen_titles:
-                unique_metadata.append(item)
-                seen_titles.add(item['title'])
+            # Deduplicate metadata by 'title'
+            seen_titles = set()
+            unique_metadata = []
+            for item in self.speech_metadata:
+                if item['title'] not in seen_titles:
+                    unique_metadata.append(item)
+                    seen_titles.add(item['title'])
 
-        # Use SpeechUpdater to update and save metadata after sorting and deduplication
-        metadata_file = os.path.join(self.base_folder, 'speech_metadata.csv')
-        backup_folder = os.path.join(self.base_folder, 'backup_metadata')
-        updater = SpeechUpdater(metadata_file=metadata_file, backup_folder=backup_folder)
-        updater.update(unique_metadata)
-
+            # Use SpeechUpdater to update and save metadata after sorting and deduplication
+            metadata_file = os.path.join(self.base_folder, 'speech_metadata.csv')
+            backup_folder = os.path.join(self.base_folder, 'backup_metadata')
+            updater = SpeechUpdater(metadata_file=metadata_file, backup_folder=backup_folder)
+            updater.update(unique_metadata)
+        except Exception as e:
+            logger.error(f"Unexpected error while saving metadata: {e}", exc_info=True)
 
     @staticmethod
     def format_date(date_str):
@@ -232,12 +242,17 @@ class SpeechDownloader:
 # Helper Functions
 def create_directory_if_not_exists(directory):
     if not os.path.exists(directory):
-        os.makedirs(directory)
-
+        try:
+            os.makedirs(directory)
+        except OSError as e:
+            logger.error(f"Failed to create directory {directory}: {e}", exc_info=True)
 
 if __name__ == "__main__":
-    logger.info("Starting SpeechDownloader script")
-    downloader = SpeechDownloader(base_folder=os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs'), start_year=config.START_YEAR)
-    downloader.download_speeches_parallel()
-    downloader.save_metadata()
-    logger.info("SpeechDownloader script finished")
+    try:
+        logger.info("Starting SpeechDownloader script")
+        downloader = SpeechDownloader(base_folder=os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs'), start_year=config.START_YEAR)
+        downloader.download_speeches_parallel()
+        downloader.save_metadata()
+        logger.info("SpeechDownloader script finished")
+    except Exception as e:
+        logger.error(f"Unexpected error in main execution: {e}", exc_info=True)
