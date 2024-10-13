@@ -20,5 +20,5 @@ PDF_DIR = os.path.join(DATA_DIR, 'pdfs')  # Create the 'pdfs' directory inside t
 
 
 # Download configuration
-START_YEAR = 2023
+START_YEAR = 2017
 MAX_WORKERS = 5

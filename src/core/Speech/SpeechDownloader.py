@@ -118,6 +118,9 @@ class SpeechDownloader:
             logger.info(f"No PDF links found for page: {page_url}")
             return
 
+        # Format the date to 'YYYY-MM-DD' from 'December 05, 2023'
+        date = self.format_date(date)
+
         # Download matching PDF files
         for pdf_url in pdf_links:
             if pdf_url.startswith("/"):
@@ -201,6 +204,19 @@ class SpeechDownloader:
         updater = SpeechUpdater(metadata_file=metadata_file, backup_folder=backup_folder)
         updater.update(self.speech_metadata)
 
+    @staticmethod
+    def format_date(date_str):
+        """
+        Convert 'December 05, 2023' format to 'YYYY-MM-DD' format.
+        """
+        try:
+            # Convert the date string to a datetime object
+            date_obj = datetime.strptime(date_str, '%B %d, %Y')
+            # Format the datetime object into 'YYYY-MM-DD' format
+            return date_obj.strftime('%Y-%m-%d')
+        except ValueError:
+            logger.error(f"Invalid date format: {date_str}")
+            return None
 
 
 # Helper Functions
