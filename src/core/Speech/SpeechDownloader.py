@@ -4,11 +4,14 @@ import os
 import re
 import logging
 import sys
+import time
 
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 from logging.handlers import RotatingFileHandler
 from threading import Lock
+
+import requests
 from tqdm import tqdm
 
 from SpeechUpdater import SpeechUpdater  # Import the updater module
@@ -93,42 +96,65 @@ class SpeechDownloader:
                 pdf_url = f"https://www.federalreserve.gov{pdf_url}"
             self._download_speech_pdf(pdf_url, year, year_folder, title, author, date)
 
-    def _download_speech_pdf(self, url, year, year_folder, title, author, date):
-        logger.info(f"Attempting to download PDF: {url}")
-        response = SpeechParser.fetch_with_retries(url)
-        if response is None:
-            logger.error(f"Failed to download PDF: {url}")
-            return
+    def _download_speech_pdf(self, url, year, year_folder, title, author, date, retries=3, delay=5):
+        """
+        Download a PDF file with a retry mechanism.
+        :param url: PDF file URL.
+        :param year: Year of the speech.
+        :param year_folder: Folder to save the PDF.
+        :param title: Title of the speech.
+        :param author: Author of the speech.
+        :param date: Date of the speech.
+        :param retries: Number of retry attempts.
+        :param delay: Delay in seconds between retries.
+        """
+        for attempt in range(retries):
+            try:
+                logger.info(f"Attempting to download PDF (Attempt {attempt+1}): {url}")
+                response = SpeechParser.fetch_with_retries(url)  # Use your fetch method here
+                if response is None:
+                    raise requests.exceptions.RequestException(f"Failed to download PDF: {url}")
 
-        clean_title = re.sub(r'[\\/*?:"<>|]', "", title)[:50]
-        if not clean_title:
-            clean_title = os.path.basename(url).split(".pdf")[0]
+                clean_title = re.sub(r'[\\/*?:"<>|]', "", title)[:50]
+                if not clean_title:
+                    clean_title = os.path.basename(url).split(".pdf")[0]
 
-        filename = f"{clean_title}_{year}.pdf"
-        save_path = os.path.join(year_folder, filename)
+                filename = f"{clean_title}_{year}.pdf"
+                save_path = os.path.join(year_folder, filename)
 
-        with self.lock:
-            if save_path in self.downloaded_files:
-                logger.info(f"Speech {filename} already exists. Skipping download.")
+                with self.lock:
+                    if save_path in self.downloaded_files:
+                        logger.info(f"Speech {filename} already exists. Skipping download.")
+                        return
+                    self.downloaded_files.add(save_path)
+
+                if not os.path.exists(save_path):
+                    with open(save_path, 'wb') as f:
+                        f.write(response.content)
+                    logger.info(f"Downloaded and saved speech to {save_path}")
+
+                metadata = {
+                    'url': url,
+                    'year': year,
+                    'title': title,
+                    'author': author,
+                    'date': date,
+                    'file_path': save_path,
+                }
+
+                with self.lock:
+                    self.speech_metadata.append(metadata)
+
+                # If download is successful, break out of the retry loop
                 return
-            self.downloaded_files.add(save_path)
 
-        if not os.path.exists(save_path):
-            with open(save_path, 'wb') as f:
-                f.write(response.content)
-            logger.info(f"Downloaded and saved speech to {save_path}")
-
-        metadata = {
-            'url': url,
-            'year': year,
-            'title': title,
-            'author': author,
-            'date': date,
-            'file_path': save_path,
-        }
-
-        with self.lock:
-            self.speech_metadata.append(metadata)
+            except requests.exceptions.RequestException as e:
+                logger.error(f"Error downloading PDF: {e}")
+                if attempt < retries - 1:
+                    logger.info(f"Retrying in {delay} seconds...")
+                    time.sleep(delay)
+                else:
+                    logger.error(f"Failed to download PDF after {retries} attempts: {url}")
 
     def save_metadata(self):
         logger.info("Saving metadata using updater...")
