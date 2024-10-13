@@ -31,8 +31,16 @@ This Python class is responsible for managing the process of downloading PDF fil
 - **Complete PDF Download Management**: Handles the entire process of downloading PDF files.
 
 
+## 2. `pdfHandler.py`
 
-## 2. `download_state.json`
+The `pdfHandler` module is responsible for converting the content of the downloaded PDF files into structured metadata and storing it for further use.
+
+### Key Features
+
+- **PDF Content to Metadata Conversion**: Extracts information from the PDF files and stores it as metadata.
+
+
+## 3. `download_state.json`
 
 - This file records the pointer from the last scraping session, allowing the scraper to continue from where it left off.
 - It tracks the last successfully processed year and ensures that duplicate downloads are avoided.
@@ -45,7 +53,7 @@ This Python class is responsible for managing the process of downloading PDF fil
 }
 
 ```
-## 3. Configuration (`config.py`)
+## 4. Configuration (`config.py`)
 
 The project provides a configuration file that allows you to set parameters to control the behavior of the PDF downloader.
 
