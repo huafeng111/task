@@ -120,7 +120,12 @@ class SpeechDownloader:
                     clean_title = os.path.basename(url).split(".pdf")[0]
 
                 filename = f"{clean_title}_{year}.pdf"
-                save_path = os.path.join(year_folder, filename)
+
+                # 拼接绝对路径
+                absolute_save_path = os.path.join(self.base_folder, str(year), filename)
+
+                # 保留相对于 base_folder 的相对路径
+                save_path = absolute_save_path.replace(os.path.abspath(self.base_folder), '').lstrip(os.sep)
 
                 with self.lock:
                     if save_path in self.downloaded_files:
@@ -128,8 +133,8 @@ class SpeechDownloader:
                         return
                     self.downloaded_files.add(save_path)
 
-                if not os.path.exists(save_path):
-                    with open(save_path, 'wb') as f:
+                if not os.path.exists(absolute_save_path):
+                    with open(absolute_save_path, 'wb') as f:
                         f.write(response.content)
                     logger.info(f"Downloaded and saved speech to {save_path}")
 
@@ -155,6 +160,8 @@ class SpeechDownloader:
                     time.sleep(delay)
                 else:
                     logger.error(f"Failed to download PDF after {retries} attempts: {url}")
+
+
 
     def save_metadata(self):
         logger.info("Saving metadata using updater...")
