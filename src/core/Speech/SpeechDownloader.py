@@ -16,28 +16,29 @@ from tqdm import tqdm
 
 from SpeechUpdater import SpeechUpdater  # Import the updater module
 import SpeechParser  # Import the parser module
+
 def dynamic_import(module_name, module_path):
     spec = importlib.util.spec_from_file_location(module_name, module_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
 
-# 假设 config.py 的绝对路径
+# Assuming the absolute path to config.py
 config_module_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "config", "config.py")
 config = dynamic_import("config", config_module_path)
 
 # Configure logging to file and console
 log_filename = config.LOG_FILE
 handler = RotatingFileHandler(log_filename, maxBytes=config.LOG_MAX_BYTES,
-                              backupCount=config.LOG_BACKUP_COUNT)  # 每个文件最大5MB，保留3个备份
+                              backupCount=config.LOG_BACKUP_COUNT)  # Max file size 5MB, keep 3 backups
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
-# 设置处理器和格式器
+# Set handler and formatter
 handler.setFormatter(formatter)
 console_handler = logging.StreamHandler()
 console_handler.setFormatter(formatter)
 
-# 创建全局 logger
+# Create a global logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 logger.addHandler(handler)
@@ -121,10 +122,10 @@ class SpeechDownloader:
 
                 filename = f"{clean_title}_{year}.pdf"
 
-                # 拼接绝对路径
+                # Concatenate absolute path
                 absolute_save_path = os.path.join(self.base_folder, str(year), filename)
 
-                # 保留相对于 base_folder 的相对路径
+                # Keep the relative path relative to base_folder
                 save_path = absolute_save_path.replace(os.path.abspath(self.base_folder), '').lstrip(os.sep)
 
                 with self.lock:
@@ -160,8 +161,6 @@ class SpeechDownloader:
                     time.sleep(delay)
                 else:
                     logger.error(f"Failed to download PDF after {retries} attempts: {url}")
-
-
 
     def save_metadata(self):
         logger.info("Saving metadata using updater...")
