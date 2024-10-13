@@ -3,20 +3,29 @@ import re
 import logging
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
+from logging.handlers import RotatingFileHandler
 from threading import Lock
+from tqdm import tqdm
 
 from SpeechUpdater import SpeechUpdater  # Import the updater module
 import SpeechParser  # Import the parser module
 
 # Configure logging to file and console
 log_filename = 'speech_downloader.log'
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s',
-                    handlers=[
-                        logging.FileHandler(log_filename),  # Log to file
-                        logging.StreamHandler()  # Log to console
-                    ])
+handler = RotatingFileHandler(log_filename, maxBytes=5 * 1024 * 1024, backupCount=3)  # 每个文件最大5MB，保留3个备份
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+
+# 设置处理器和格式器
+handler.setFormatter(formatter)
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(formatter)
+
+# 创建全局 logger
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+logger.addHandler(handler)
+logger.addHandler(console_handler)
+
 
 class SpeechDownloader:
     """
@@ -44,10 +53,13 @@ class SpeechDownloader:
         logger.info("Starting download_speeches_parallel")
         with ThreadPoolExecutor(max_workers=5) as executor:
             current_year = datetime.now().year
-            for year in range(self.start_year, current_year + 1):
-                year_folder = os.path.join(self.base_folder, str(year))
-                create_directory_if_not_exists(year_folder)
-                executor.submit(self._process_year, year, year_folder)
+            years = range(self.start_year, current_year + 1)
+            with tqdm(total=len(years)) as pbar:
+                for year in years:
+                    year_folder = os.path.join(self.base_folder, str(year))
+                    create_directory_if_not_exists(year_folder)
+                    executor.submit(self._process_year, year, year_folder)
+                    pbar.update(1)
 
     def _process_year(self, year, year_folder):
         speech_page_links = SpeechParser.fetch_speech_links_for_year(year)
@@ -58,6 +70,7 @@ class SpeechDownloader:
     def _process_speech_page(self, page_url, year, year_folder):
         pdf_links, title, author, date = SpeechParser.fetch_pdf_links_from_speech_page(page_url)
         if not pdf_links:
+            logger.info(f"No PDF links found for page: {page_url}")
             return
 
         # Download matching PDF files
@@ -67,8 +80,10 @@ class SpeechDownloader:
             self._download_speech_pdf(pdf_url, year, year_folder, title, author, date)
 
     def _download_speech_pdf(self, url, year, year_folder, title, author, date):
+        logger.info(f"Attempting to download PDF: {url}")
         response = SpeechParser.fetch_with_retries(url)
         if response is None:
+            logger.error(f"Failed to download PDF: {url}")
             return
 
         clean_title = re.sub(r'[\\/*?:"<>|]', "", title)[:50]
@@ -87,6 +102,7 @@ class SpeechDownloader:
         if not os.path.exists(save_path):
             with open(save_path, 'wb') as f:
                 f.write(response.content)
+            logger.info(f"Downloaded and saved speech to {save_path}")
 
         metadata = {
             'url': url,
@@ -108,14 +124,16 @@ class SpeechDownloader:
         updater = SpeechUpdater(metadata_file=metadata_file, backup_folder=backup_folder)
         updater.update(self.speech_metadata)
 
+
 # Helper Functions
 def create_directory_if_not_exists(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
+
 if __name__ == "__main__":
     logger.info("Starting SpeechDownloader script")
-    downloader = SpeechDownloader(base_folder='./data/pdfs', start_year=2024)
+    downloader = SpeechDownloader(base_folder='./data/pdfs', start_year=2017)
     downloader.download_speeches_parallel()
     downloader.save_metadata()
     logger.info("SpeechDownloader script finished")

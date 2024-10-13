@@ -19,7 +19,7 @@ def get_soup_from_url(url):
         logger.error(f"Error occurred: {err}")
     return None
 
-def fetch_with_retries(url, retries=3, delay=5):
+def fetch_with_retries(url, retries=3, delay=5, backoff_factor=2):
     for i in range(retries):
         try:
             response = requests.get(url, timeout=10)
@@ -28,7 +28,8 @@ def fetch_with_retries(url, retries=3, delay=5):
         except (HTTPError, requests.exceptions.ConnectionError) as e:
             logger.warning(f"Attempt {i+1} failed for {url}: {e}. Retrying in {delay} seconds...")
             time.sleep(delay)
-    return None
+            delay *= backoff_factor  # 增加退避因子
+
 
 def fetch_speech_links_for_year(year):
     base_url = f"https://www.federalreserve.gov/newsevents/speech/{year}-speeches.htm"
