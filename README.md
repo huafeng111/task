@@ -6,6 +6,7 @@ Ensure you have Python 3.12 installed. Then, install the required dependencies b
 
 ```bash
 pip install -r requirements.txt
+```
 
 ### 2. Start the Project
 
@@ -13,7 +14,7 @@ Once the dependencies are installed, you can start the project using `uvicorn`. 
 
 ```bash
 uvicorn app:app --host 0.0.0.0 --port 5000 --reload
-
+```
 
 # Configuration and Notes
 
