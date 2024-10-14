@@ -43,6 +43,11 @@ The `pdfHandler` module is responsible for converting the content of the downloa
 
 The `get_pdf_by_title` function in `FetchSpeechData.py` allows you to retrieve and parse the PDF metadata from MongoDB based on the PDF title, converting it back into a downloadable PDF.
 
+```bash
+curl --location 'http://localhost:5000/s/get_pdf_by_title/?title=The%20Economic%20Outlook%20and%20Monetary%20Policy' \
+--header 'Content-Type: application/json' \
+--data ''
+```
 ## 4. `download_state.json`
 
 - This file records the pointer from the last scraping session, allowing the scraper to continue from where it left off.
