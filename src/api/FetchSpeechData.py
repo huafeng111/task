@@ -49,7 +49,6 @@ db_manager = AsyncMongoDBManager()
 speech_app = FastAPI()
 @speech_app.get("/get_pdf_by_title/")
 async def get_pdf_by_title(title: str):
-    print("done")
     title = title.strip()
 
     # Retrieve document from MongoDB
