@@ -56,7 +56,7 @@ def fetch_speech_links_for_year(year):
     # Get all links pointing to speech detail pages
     speech_page_links = [
         link['href'] for link in soup.find_all('a', href=True)
-        if link['href'].startswith("/newsevents/speech/") and link['href'].endswith(".htm")
+        if link['href'].startswith("/newsevents/speech") and link['href'].endswith(".htm") and not link.has_attr('class')
     ]
 
     if not speech_page_links:

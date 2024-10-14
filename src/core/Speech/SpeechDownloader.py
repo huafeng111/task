@@ -116,7 +116,6 @@ class SpeechDownloader:
             speech_page_links = SpeechParser.fetch_speech_links_for_year(year)
             total_links = len(speech_page_links)  # 获取该年份下的URL数量
             logger.info(f"Year {year} has {total_links} speech page links.")
-
             if total_links == 0:
                 logger.info(f"No speech page links found for year {year}.")
                 return
@@ -237,8 +236,8 @@ class SpeechDownloader:
         try:
             logger.info("Saving metadata using updater...")
 
-            # Sort metadata by 'date' before saving (assume 'date' is in 'YYYY-MM-DD' format)
-            self.speech_metadata.sort(key=lambda x: x['date'])
+            # Sort metadata by 'date', treating None as an empty string (earliest date)
+            self.speech_metadata.sort(key=lambda x: x['date'] if x['date'] is not None else '')
 
             # Deduplicate metadata by 'title'
             seen_titles = set()
@@ -255,6 +254,7 @@ class SpeechDownloader:
             updater.update(unique_metadata)
         except Exception as e:
             logger.error(f"Unexpected error while saving metadata: {e}", exc_info=True)
+
 
     @staticmethod
     def format_date(date_str):
