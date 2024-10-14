@@ -61,13 +61,22 @@ curl --location 'http://localhost:5000/s/get_pdf_by_title/?title=The%20Economic%
 }
 
 ```
-## 5. Configuration (`config.py`)
+## 5. MongoDbManger (`MongoDbManger.py`)
+
+The `MongoDbManger.py` script is responsible for bulk inserting PDF data into MongoDB Cloud. It connects to your MongoDB database and efficiently uploads multiple PDF records in a single operation, improving performance and reducing the number of network calls.
+
+Ensure that your MongoDB Cloud connection details (such as the URI, database name, and collection name) are correctly configured in the appropriate configuration file (`config.py` or environment variables) before running this script.
+
+The `MongoDbManger.py` script is automatically run by the `script.sh` every 15 minutes as part of the process to upload PDFs to the cloud database.
+
+
+## 6. Configuration (`config.py`)
 
 The project provides a configuration file that allows you to set parameters to control the behavior of the PDF downloader.
 
 
 
-## 6. Running the script
+## 7. Running the script
 
 To run the project and execute the Python scripts periodically, you can use the `script.sh` file. This script is set up to run the necessary Python scripts every 15 minutes.
 
@@ -79,5 +88,5 @@ To run the project and execute the Python scripts periodically, you can use the 
 
    ```bash
    ./script.sh
-
+	```
 
