@@ -1,156 +1,149 @@
+# -*- coding: utf-8 -*-
+
 import os
 import fitz  # PyMuPDF
 import json
 import pandas as pd
+import aiofiles  # For async file operations
+import asyncio
+import logging
+from aiofiles import os as aio_os  # async os operations
+
+# 配置日志
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class PDFHandler:
     def __init__(self, csv_relative_path):
-        # Get the current script directory and construct the relative path
-        script_dir = os.path.dirname(os.path.abspath(__file__))  # Get the absolute path of the current script
-        self.csv_file = os.path.abspath(os.path.join(script_dir, csv_relative_path))  # Find CSV file using relative path
-        self.base_dir = os.path.dirname(self.csv_file)  # Base directory for the CSV file
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        self.csv_file = os.path.abspath(os.path.join(script_dir, csv_relative_path))
+        self.base_dir = os.path.dirname(self.csv_file)
 
-        # Print the paths to check if they are correct
-        print("CSV file path:", self.csv_file)
-        print("Base directory:", self.base_dir)
-        print("Current working directory:", os.getcwd())
+        logging.info(f"CSV file path: {self.csv_file}")
+        logging.info(f"Base directory: {self.base_dir}")
+        logging.info(f"Current working directory: {os.getcwd()}")
 
         if not os.path.exists(self.csv_file):
-            print(f"File not found: {self.csv_file}")
-            return
+            logging.error(f"File not found: {self.csv_file}")
+            raise FileNotFoundError(f"CSV file not found at {self.csv_file}")
 
-        # Load the CSV data into a pandas DataFrame
-        self.csv_data = pd.read_csv(self.csv_file)
-        print("CSV data loaded successfully")
-
-    def extract_pdf_metadata(self, file_path):
-        # Extract metadata and text from a PDF file using PyMuPDF (fitz)
         try:
-            # Change the working directory to the base directory to handle relative paths
-            original_cwd = os.getcwd()
-            os.chdir(self.base_dir)  # Change to the base directory where PDFs are located
+            self.csv_data = pd.read_csv(self.csv_file)
+            logging.info("CSV data loaded successfully")
+        except Exception as e:
+            logging.error(f"Error reading CSV file: {e}")
+            raise
 
-            doc = fitz.open(file_path)  # Open the PDF file using the relative path
-            metadata = doc.metadata  # Get metadata of the PDF
-            pages = []
-            for page_num in range(doc.page_count):
-                page = doc.load_page(page_num)  # Load a single page
-                text = page.get_text("text")  # Extract text from the page
-                pages.append(text)  # Append text for each page
+    async def extract_pdf_metadata(self, file_path):
+        original_cwd = os.getcwd()
+        try:
+            os.chdir(self.base_dir)
+            doc = fitz.open(file_path)
+            metadata = doc.metadata
+            pages = [doc.load_page(i).get_text("text") for i in range(doc.page_count)]
 
-            os.chdir(original_cwd)  # Switch back to the original directory
-
+            logging.info(f"PDF metadata and text extracted for {file_path}")
             return {"metadata": metadata, "pages": pages}
-        except Exception as e:
-            print(f"Could not read PDF file {file_path}: {e}")
-            os.chdir(original_cwd)  # Ensure we switch back even if there was an error
+        except FileNotFoundError:
+            logging.error(f"PDF file not found: {file_path}")
             return None
-
-    def get_csv_metadata(self, relative_pdf_path):
-        # Find the metadata for the PDF file from the CSV
-        try:
-            csv_row = self.csv_data[self.csv_data['file_path'] == relative_pdf_path]
-            if not csv_row.empty:
-                # Convert the row to a dictionary for easier use
-                return csv_row.iloc[0].to_dict()
-            else:
-                print(f"No matching entry found in CSV for file: {relative_pdf_path}")
-                return None
         except Exception as e:
-            print(f"Error fetching CSV metadata: {e}")
+            logging.error(f"Could not read PDF file {file_path}: {e}")
             return None
+        finally:
+            os.chdir(original_cwd)
 
-    def load_existing_metadata(self, output_file):
-        # Load existing metadata if the file exists
-        if os.path.exists(output_file):
+    async def load_existing_metadata(self, output_file):
+        if await aio_os.path.exists(output_file):
             try:
-                with open(output_file, 'r', encoding='utf-8') as f:
-                    all_metadata = json.load(f)
-                print(f"Existing metadata loaded from {output_file}")
+                async with aiofiles.open(output_file, 'r', encoding='utf-8') as f:
+                    all_metadata = json.loads(await f.read())
+                logging.info(f"Existing metadata loaded from {output_file}")
                 return all_metadata
             except Exception as e:
-                print(f"Error loading existing metadata: {e}")
+                logging.error(f"Error loading existing metadata: {e}")
                 return []
         else:
+            logging.warning(f"No existing metadata found at {output_file}")
             return []
 
-    def save_all_metadata(self, all_metadata, output_file):
-        # Save all extracted metadata and text to a single JSON file
+    async def save_all_metadata(self, all_metadata, output_file):
         try:
-            with open(output_file, 'w', encoding='utf-8') as f:
-                json.dump(all_metadata, f, ensure_ascii=False, indent=4)
-            print(f"All metadata and text saved to {output_file}")
+            async with aiofiles.open(output_file, 'w', encoding='utf-8') as f:
+                await f.write(json.dumps(all_metadata, ensure_ascii=False, indent=4))
+            logging.info(f"All metadata and text saved to {output_file}")
         except Exception as e:
-            print(f"Failed to save all metadata: {e}")
+            logging.error(f"Failed to save all metadata: {e}")
+            raise
 
-    def process_all_pdfs(self, output_file):
-        # Load existing metadata (if available)
-        all_metadata = self.load_existing_metadata(output_file)
+    async def process_all_pdfs(self, output_file):
+        all_metadata = await self.load_existing_metadata(output_file)
         existing_pdf_paths = {entry.get('csv_metadata', {}).get('file_path', '') for entry in all_metadata}
 
-        # Process all PDFs listed in the CSV file
         for index, row in self.csv_data.iterrows():
             relative_pdf_path = row['file_path']
 
-            # Check if the PDF is already processed and in the metadata
             if relative_pdf_path in existing_pdf_paths:
-                print(f"Skipping already processed PDF: {relative_pdf_path}")
+                logging.info(f"Skipping already processed PDF: {relative_pdf_path}")
                 continue
 
-            # Extract metadata from the PDF
-            pdf_data = self.extract_pdf_metadata(relative_pdf_path)
+            pdf_data = await self.extract_pdf_metadata(relative_pdf_path)
 
             if pdf_data:
-                # Get additional metadata from CSV
-                csv_metadata = row.to_dict()  # Directly use the row as CSV metadata
-                title = csv_metadata.pop('title')  # Extract title and remove it from csv_metadata
+                csv_metadata = row.to_dict()
+                title = csv_metadata.pop('title')
 
-                # Combine both PDF metadata and CSV metadata
                 combined_metadata = {
-                    "title": title,  # Place title as a top-level key
+                    "title": title,
                     "pdf_metadata": pdf_data['metadata'],
                     "pages": pdf_data['pages'],
-                    "csv_metadata": csv_metadata  # Other CSV data remains in csv_metadata
+                    "csv_metadata": csv_metadata,
+                    "type" : "speech"
                 }
 
-                # Add the combined metadata to the list
                 all_metadata.append(combined_metadata)
+            else:
+                logging.error(f"Failed to extract data from PDF: {relative_pdf_path}")
 
-        # Save all metadata (newly processed + previously existing) to a single JSON file
-        self.save_all_metadata(all_metadata, output_file)
+        await self.save_all_metadata(all_metadata, output_file)
 
-    def validate_pdfs_in_json(self, json_file_path):
-        """Compare CSV file paths with JSON file paths to ensure all PDFs are processed."""
-        # Extract all PDF file paths from the CSV
+    async def validate_pdfs_in_json(self, json_file_path):
         csv_pdf_paths = self.csv_data['file_path'].tolist()
 
-        # Load JSON data
-        if not os.path.exists(json_file_path):
-            print(f"JSON file not found: {json_file_path}")
+        if not await aio_os.path.exists(json_file_path):
+            logging.error(f"JSON file not found: {json_file_path}")
             return
 
-        with open(json_file_path, 'r', encoding='utf-8') as f:
-            json_data = json.load(f)
+        try:
+            async with aiofiles.open(json_file_path, 'r', encoding='utf-8') as f:
+                json_data = json.loads(await f.read())
+        except Exception as e:
+            logging.error(f"Error reading JSON file: {e}")
+            return
 
-        # Extract the file paths from the csv_metadata for each entry in the JSON
         json_pdf_paths = [entry['csv_metadata']['file_path'] for entry in json_data]
-
-        # Find PDFs in CSV that are missing in the JSON file
         missing_pdfs = [pdf for pdf in csv_pdf_paths if pdf not in json_pdf_paths]
 
         if not missing_pdfs:
-            print("Validation successful: All PDFs in the CSV are present in the JSON.")
+            logging.info("Validation successful: All PDFs in the CSV are present in the JSON.")
         else:
-            print(f"Validation failed: The following PDFs are missing in the JSON:\n{missing_pdfs}")
+            logging.warning(f"Validation failed: The following PDFs are missing in the JSON:\n{missing_pdfs}")
 
 if __name__ == "__main__":
-    csv_relative_path = "../../../data/pdfs/speech_metadata.csv"  # Adjust the relative path based on your directory structure
-    output_metadata_file = "./UploadDb/all_metadata_and_text.json"  # Output JSON file to store all metadata
+    # 获取当前脚本文件的路径
+    script_dir = os.path.dirname(os.path.abspath(__file__))
 
-    handler = PDFHandler(csv_relative_path)
+    # 定义相对路径，并将其转换为绝对路径
+    csv_relative_path = "../../../data/pdfs/speech_metadata.csv"
+    output_metadata_file = "./UploadDb/all_metadata_and_text.json"
 
-    # Process all PDFs listed in the CSV and save their metadata into one JSON file
-    handler.process_all_pdfs(output_metadata_file)
+    # 将相对路径转换为基于脚本的绝对路径
+    csv_absolute_path = os.path.abspath(os.path.join(script_dir, csv_relative_path))
+    output_metadata_absolute_path = os.path.abspath(os.path.join(script_dir, output_metadata_file))
 
-    # Validate that all PDFs in the CSV are present in the generated JSON
-    handler.validate_pdfs_in_json(output_metadata_file)
+
+    # 创建 PDFHandler 实例
+    handler = PDFHandler(csv_absolute_path)
+
+    # 运行异步函数
+    asyncio.run(handler.process_all_pdfs(output_metadata_absolute_path))
+    asyncio.run(handler.validate_pdfs_in_json(output_metadata_absolute_path))
