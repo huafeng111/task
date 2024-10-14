@@ -28,6 +28,6 @@ DATA_DIR = os.path.join(BASE_DIR, 'data')  # Point to \task\src\core\Speech\data
 PDF_DIR = os.path.join(DATA_DIR, 'pdfs')  # Create the 'pdfs' directory inside the data folder
 
 # Download configuration
-START_YEAR = 2017
+START_YEAR = 2024
 MAX_WORKERS = 5
 
