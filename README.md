@@ -23,12 +23,13 @@ This project is designed to download PDF files using a web scraper. Below are th
 
 ## 1. `SpeechDownloader.py`
 
-This Python class is responsible for managing the process of downloading PDF files. It downloads the files from specified URLs and updates the `download_state.json` file to track progress. 
-
+This Python class is responsible for managing the process of downloading PDF files. It downloads the files from specified URLs and updates the `download_state.json` file to track progress. If any PDF fails to download successfully, it logs the details in an `error.json` file for further review.
 
 ### Key Features
 
 - **Complete PDF Download Management**: Handles the entire process of downloading PDF files.
+- **Error Handling**: Unsuccessful PDF downloads are recorded in the `error.json` file, allowing for easy troubleshooting and retrying of failed downloads.
+
 
 
 ## 2. `pdfHandler.py`
@@ -74,19 +75,20 @@ The `MongoDbManger.py` script is automatically run by the `script.sh` every 15 m
 
 The project provides a configuration file that allows you to set parameters to control the behavior of the PDF downloader.
 
-
-
 ## 7. Running the script
 
-To run the project and execute the Python scripts periodically, you can use the `script.sh` file. This script is set up to run the necessary Python scripts every 15 minutes.
+To execute the project and run the Python scripts periodically, it is recommended to use **Bash** to run the `script.sh` file. Bash ensures compatibility across different environments and helps manage the script's infinite loop and timed execution.
 
-### Steps to run the script:
+### Steps to run the script using Bash:
 
-1. Ensure that your virtual environment is created and installed with all the necessary dependencies (`venv` folder should be in the project directory).
+1. Ensure that your virtual environment is set up and all necessary dependencies are installed (the `venv` folder should exist in the project directory).
 2. Open a terminal and navigate to the project directory.
-3. Run the following command to start the script:
+3. Run the following command using Bash:
 
    ```bash
    ./script.sh
-	```
+   ```
+   
+   
+
 
