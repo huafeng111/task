@@ -120,7 +120,7 @@ async def upload_json_to_mongodb(json_file_path, db_manager):
 # 将所有异步操作放在一个函数中，避免多次调用 asyncio.run()
 async def main():
     # Path to the JSON file containing speech metadata and text, use absolute path to ensure the file exists
-    json_file_path = r"all_metadata_and_text.json"
+    json_file_path = os.path.join(current_script_dir, "all_metadata_and_text.json")
 
     # Initialize MongoDBManager
     db_manager = AsyncMongoDBManager()

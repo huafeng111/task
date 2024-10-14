@@ -128,11 +128,21 @@ class PDFHandler:
             logging.warning(f"Validation failed: The following PDFs are missing in the JSON:\n{missing_pdfs}")
 
 if __name__ == "__main__":
+    # 获取当前脚本文件的路径
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # 定义相对路径，并将其转换为绝对路径
     csv_relative_path = "../../../data/pdfs/speech_metadata.csv"
     output_metadata_file = "./UploadDb/all_metadata_and_text.json"
 
-    handler = PDFHandler(csv_relative_path)
+    # 将相对路径转换为基于脚本的绝对路径
+    csv_absolute_path = os.path.abspath(os.path.join(script_dir, csv_relative_path))
+    output_metadata_absolute_path = os.path.abspath(os.path.join(script_dir, output_metadata_file))
 
-    # Run async main loop
-    asyncio.run(handler.process_all_pdfs(output_metadata_file))
-    asyncio.run(handler.validate_pdfs_in_json(output_metadata_file))
+
+    # 创建 PDFHandler 实例
+    handler = PDFHandler(csv_absolute_path)
+
+    # 运行异步函数
+    asyncio.run(handler.process_all_pdfs(output_metadata_absolute_path))
+    asyncio.run(handler.validate_pdfs_in_json(output_metadata_absolute_path))

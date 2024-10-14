@@ -73,8 +73,10 @@ def fetch_pdf_links_from_speech_page(page_url):
         logger.error(f"Unable to fetch or parse the speech page URL: {page_url}. Returning default values.")
         return [], "No Title", "Unknown Author", "Unknown Date"
 
-    # Extract the page filename (used to match .pdf files)
-    page_filename = os.path.basename(page_url).split(".htm")[0]  # e.g., bowman20231205a
+    # Extract the main part of the filename (without the trailing letter)
+    page_filename = os.path.basename(page_url).split(".htm")[0]  # e.g., powell20190228b
+    # Remove the last character if it's a letter (to handle cases like powell20190228b -> powell20190228)
+    main_filename = re.sub(r'[a-zA-Z]$', '', page_filename)  # e.g., powell20190228b -> powell20190228
 
     title_tag = soup.find('h3', class_='title')
     if title_tag:
@@ -96,7 +98,7 @@ def fetch_pdf_links_from_speech_page(page_url):
     # Search for .pdf links related to the current speech page
     pdf_links = [
         link['href'] for link in soup.find_all('a', href=True)
-        if link['href'].endswith(".pdf") and page_filename in link['href']
+        if link['href'].endswith(".pdf") and main_filename in link['href']  # Use main_filename for matching
     ]
 
     if not pdf_links:
@@ -109,4 +111,5 @@ def fetch_pdf_links_from_speech_page(page_url):
     ]
 
     return pdf_links, title, author, date
+
 

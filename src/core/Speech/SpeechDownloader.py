@@ -16,11 +16,13 @@ from tqdm import tqdm
 from SpeechUpdater import SpeechUpdater  # Import the updater module
 import SpeechParser  # Import the parser module
 
+
 def dynamic_import(module_name, module_path):
     spec = importlib.util.spec_from_file_location(module_name, module_path)
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
 
 # Assuming the relative path to config.py from the current script
 config_module_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "config", "config.py")
@@ -46,6 +48,81 @@ if not logger.hasHandlers():
     logger.addHandler(handler)
     logger.addHandler(console_handler)
 
+def log_error2(error_type, message, url=None, error_file=None):
+    error_data = {
+        'error_type': error_type,
+        'message': message,
+        'url': url,
+        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    }
+
+    # 如果 error_file 没有传递，就默认保存到 error2.json
+    if error_file is None:
+        error_file = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs', 'error2.json')
+
+    # 如果文件存在，则加载现有错误，否则创建新的
+    if os.path.exists(error_file):
+        try:
+            with open(error_file, 'r') as f:
+                errors = json.load(f)
+        except json.JSONDecodeError:
+            errors = []
+    else:
+        errors = []
+
+    errors.append(error_data)
+
+    # 写入错误日志文件
+    with open(error_file, 'w') as f:
+        json.dump(errors, f, indent=4)
+
+
+def retry_download_speech(url, downloader, retries=3, delay=10):
+    """
+    Re-downloads the specified URL using a safer strategy.
+    :param url: The URL to be downloaded
+    :param downloader: SpeechDownloader instance used to save successfully downloaded metadata
+    :param retries: Maximum number of retry attempts
+    :param delay: Delay in seconds between each retry
+    """
+    for attempt in range(retries):
+        try:
+            # Safer strategy: add delay, reduce concurrent requests, etc.
+            logger.info(f"Retrying download (Attempt {attempt + 1}) for URL: {url}")
+            time.sleep(delay)  # Add delay
+            response = SpeechParser.fetch_with_retries(url)  # Use the previous download method
+            if response is None:
+                raise requests.exceptions.RequestException(f"Failed to download: {url}")
+
+            # Assume we can extract the necessary metadata from the original error information
+            title = "Title extracted from error or page"  # Extract title from the error record or re-parse it
+            author = "Author extracted from error or page"  # Extract author from the error record or re-parse it
+            date = "Date extracted from error or page"  # Extract date from the error record or re-parse it
+
+            # Use the downloader's metadata saving logic
+            year = datetime.now().year  # Assume current year
+            year_folder = os.path.join(downloader.base_folder, str(year))
+
+            # Create year folder
+            create_directory_if_not_exists(year_folder)
+
+            # Download and save metadata
+            downloader._download_speech_pdf(url, year, year_folder, title, author, date)
+
+            logger.info(f"Successfully re-downloaded URL: {url}")
+
+            # Exit loop after successful download
+            return
+
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Error re-downloading PDF: {e}")
+            if attempt < retries - 1:
+                logger.info(f"Retrying in {delay} seconds...")
+                delay *= 2  # Increase delay
+            else:
+                logger.error(f"Failed to download URL after {retries} attempts: {url}")
+
+
 class SpeechDownloader:
     """
     This class is responsible for downloading Federal Reserve speeches and saving them locally.
@@ -54,7 +131,8 @@ class SpeechDownloader:
 
     STATE_FILE = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs', 'download_state.json')
 
-    def __init__(self, base_folder=os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs'), start_year=config.START_YEAR):
+    def __init__(self, base_folder=os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs'),
+                 start_year=config.START_YEAR):
         self.base_folder = os.path.abspath(base_folder)
         self.start_year = start_year
         self.speech_metadata = []
@@ -126,8 +204,8 @@ class SpeechDownloader:
         except Exception as e:
             error_message = f"Failed to fetch speech links for year {year}: {e}"
             logger.error(error_message, exc_info=True)
-            log_error("Fetch speech links error", error_message, url=f"https://www.federalreserve.gov/speeches-{year}.htm")
-
+            log_error("Fetch speech links error", error_message,
+                      url=f"https://www.federalreserve.gov/speeches-{year}.htm")
 
     def _process_speech_page(self, page_url, year, year_folder):
         try:
@@ -166,7 +244,7 @@ class SpeechDownloader:
         """
         for attempt in range(retries):
             try:
-                logger.info(f"Attempting to download PDF (Attempt {attempt+1}): {url}")
+                logger.info(f"Attempting to download PDF (Attempt {attempt + 1}): {url}")
                 response = SpeechParser.fetch_with_retries(url)  # Use your fetch method here
                 if response is None:
                     raise requests.exceptions.RequestException(f"Failed to download PDF: {url}")
@@ -210,7 +288,7 @@ class SpeechDownloader:
                 return
 
             except requests.exceptions.SSLError as ssl_err:
-                error_message = f"SSL error occurred on attempt {attempt+1} for URL '{url}': {ssl_err}"
+                error_message = f"SSL error occurred on attempt {attempt + 1} for URL '{url}': {ssl_err}"
                 logger.warning(error_message)
                 if attempt < retries - 1:
                     logger.info(f"Retrying in {delay} seconds...")
@@ -230,7 +308,6 @@ class SpeechDownloader:
                 else:
                     logger.error(f"Failed to download PDF after {retries} attempts: {url}")
                     log_error("PDF download failed", error_message, url=url)
-
 
     def save_metadata(self):
         try:
@@ -255,7 +332,6 @@ class SpeechDownloader:
         except Exception as e:
             logger.error(f"Unexpected error while saving metadata: {e}", exc_info=True)
 
-
     @staticmethod
     def format_date(date_str):
         """
@@ -279,6 +355,7 @@ def create_directory_if_not_exists(directory):
         except OSError as e:
             logger.error(f"Failed to create directory {directory}: {e}", exc_info=True)
 
+
 def log_error(error_type, message, url=None):
     error_file = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs', 'errors.json')
 
@@ -289,7 +366,7 @@ def log_error(error_type, message, url=None):
         'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     }
 
-    # 如果文件存在，则加载现有错误，否则创建新的
+    # If the file exists, load the existing errors, otherwise create a new list
     if os.path.exists(error_file):
         try:
             with open(error_file, 'r') as f:
@@ -299,19 +376,29 @@ def log_error(error_type, message, url=None):
     else:
         errors = []
 
+    # Duplicate check: check if the same URL is already present
+    for error in errors:
+        if error.get('url') == url:
+            logger.info(f"Duplicate error found for URL: {url}. Skipping log.")
+            return  # Skip logging if a duplicate URL is found
+
+    # If no duplicate is found, append the new error data
     errors.append(error_data)
 
-    # 写入错误日志文件
+    # Write the updated errors back to the file
     with open(error_file, 'w') as f:
         json.dump(errors, f, indent=4)
 
 
+
 if __name__ == "__main__":
     try:
-        logger.info("Starting SpeechDownloader script")
-        downloader = SpeechDownloader(base_folder=os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs'), start_year=config.START_YEAR)
+        # logger.info("Starting SpeechDownloader script")
+        downloader = SpeechDownloader(base_folder=os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs'),
+                                       start_year=config.START_YEAR)
         downloader.download_speeches_parallel()
         downloader.save_metadata()
+
         logger.info("SpeechDownloader script finished")
     except Exception as e:
         logger.error(f"Unexpected error in main execution: {e}", exc_info=True)
