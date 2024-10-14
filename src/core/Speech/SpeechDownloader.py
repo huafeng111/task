@@ -26,7 +26,6 @@ def dynamic_import(module_name, module_path):
 config_module_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "config", "config.py")
 config = dynamic_import("config", config_module_path)
 
-
 # Configure logging to file and console
 log_filename = os.path.join(os.path.dirname(__file__), config.LOG_FILE)  # Use relative path for log file
 handler = RotatingFileHandler(log_filename, maxBytes=config.LOG_MAX_BYTES,
@@ -41,8 +40,11 @@ console_handler.setFormatter(formatter)
 # Create a global logger
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-logger.addHandler(handler)
-logger.addHandler(console_handler)
+
+# Check if logger already has handlers to avoid duplicate logs
+if not logger.hasHandlers():
+    logger.addHandler(handler)
+    logger.addHandler(console_handler)
 
 class SpeechDownloader:
     """
@@ -112,17 +114,29 @@ class SpeechDownloader:
     def _process_year(self, year, year_folder):
         try:
             speech_page_links = SpeechParser.fetch_speech_links_for_year(year)
+            total_links = len(speech_page_links)  # 获取该年份下的URL数量
+            logger.info(f"Year {year} has {total_links} speech page links.")
+
+            if total_links == 0:
+                logger.info(f"No speech page links found for year {year}.")
+                return
+
             for speech_page_url in speech_page_links:
                 full_page_url = f"https://www.federalreserve.gov{speech_page_url}"
                 self._process_speech_page(full_page_url, year, year_folder)
         except Exception as e:
-            logger.error(f"Error processing year {year}: {e}", exc_info=True)
+            error_message = f"Failed to fetch speech links for year {year}: {e}"
+            logger.error(error_message, exc_info=True)
+            log_error("Fetch speech links error", error_message, url=f"https://www.federalreserve.gov/speeches-{year}.htm")
+
 
     def _process_speech_page(self, page_url, year, year_folder):
         try:
             pdf_links, title, author, date = SpeechParser.fetch_pdf_links_from_speech_page(page_url)
             if not pdf_links:
-                logger.info(f"No PDF links found for page: {page_url}")
+                error_message = f"No PDF links found for page: {page_url}"
+                logger.info(error_message)
+                log_error("No PDF links", error_message, url=page_url)
                 return
 
             # Format the date to 'YYYY-MM-DD' from 'December 05, 2023'
@@ -134,11 +148,13 @@ class SpeechDownloader:
                     pdf_url = f"https://www.federalreserve.gov{pdf_url}"
                 self._download_speech_pdf(pdf_url, year, year_folder, title, author, date)
         except Exception as e:
-            logger.error(f"Error processing speech page {page_url}: {e}", exc_info=True)
+            error_message = f"Error processing speech page {page_url}: {e}"
+            logger.error(error_message, exc_info=True)
+            log_error("Process speech page error", error_message, url=page_url)
 
-    def _download_speech_pdf(self, url, year, year_folder, title, author, date, retries=3, delay=5):
+    def _download_speech_pdf(self, url, year, year_folder, title, author, date, retries=5, delay=5, backoff_factor=2):
         """
-        Download a PDF file with a retry mechanism.
+        Download a PDF file with a retry mechanism and improved SSL error handling.
         :param url: PDF file URL.
         :param year: Year of the speech.
         :param year_folder: Folder to save the PDF.
@@ -146,7 +162,8 @@ class SpeechDownloader:
         :param author: Author of the speech.
         :param date: Date of the speech.
         :param retries: Number of retry attempts.
-        :param delay: Delay in seconds between retries.
+        :param delay: Initial delay in seconds between retries.
+        :param backoff_factor: Factor by which delay increases after each retry.
         """
         for attempt in range(retries):
             try:
@@ -159,7 +176,7 @@ class SpeechDownloader:
                 if not clean_title:
                     clean_title = os.path.basename(url).split(".pdf")[0]
 
-                filename = f"{clean_title}_{year}.pdf"
+                filename = f"{clean_title}_{date}.pdf"
 
                 # Concatenate absolute path
                 absolute_save_path = os.path.join(year_folder, filename)
@@ -193,13 +210,28 @@ class SpeechDownloader:
                 # If download is successful, break out of the retry loop
                 return
 
-            except requests.exceptions.RequestException as e:
-                logger.error(f"Error downloading PDF: {e}")
+            except requests.exceptions.SSLError as ssl_err:
+                error_message = f"SSL error occurred on attempt {attempt+1} for URL '{url}': {ssl_err}"
+                logger.warning(error_message)
                 if attempt < retries - 1:
                     logger.info(f"Retrying in {delay} seconds...")
                     time.sleep(delay)
+                    delay *= backoff_factor  # Exponentially increase delay on each retry
+                else:
+                    logger.error(f"Failed to download PDF after {retries} attempts due to SSL error: {url}")
+                    log_error("PDF download failed due to SSL error", error_message, url=url)
+
+            except requests.exceptions.RequestException as e:
+                error_message = f"Error downloading PDF: {e}"
+                logger.error(error_message)
+                if attempt < retries - 1:
+                    logger.info(f"Retrying in {delay} seconds...")
+                    time.sleep(delay)
+                    delay *= backoff_factor  # Exponentially increase delay on each retry
                 else:
                     logger.error(f"Failed to download PDF after {retries} attempts: {url}")
+                    log_error("PDF download failed", error_message, url=url)
+
 
     def save_metadata(self):
         try:
@@ -246,6 +278,33 @@ def create_directory_if_not_exists(directory):
             os.makedirs(directory)
         except OSError as e:
             logger.error(f"Failed to create directory {directory}: {e}", exc_info=True)
+
+def log_error(error_type, message, url=None):
+    error_file = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'pdfs', 'errors.json')
+
+    error_data = {
+        'error_type': error_type,
+        'message': message,
+        'url': url,
+        'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    }
+
+    # 如果文件存在，则加载现有错误，否则创建新的
+    if os.path.exists(error_file):
+        try:
+            with open(error_file, 'r') as f:
+                errors = json.load(f)
+        except json.JSONDecodeError:
+            errors = []
+    else:
+        errors = []
+
+    errors.append(error_data)
+
+    # 写入错误日志文件
+    with open(error_file, 'w') as f:
+        json.dump(errors, f, indent=4)
+
 
 if __name__ == "__main__":
     try:
