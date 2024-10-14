@@ -64,9 +64,8 @@ curl --location 'http://localhost:5000/s/get_pdf_by_title/?title=The%20Economic%
 ```
 ## 5. MongoDbManger (`MongoDbManger.py`)
 
-The `MongoDbManger.py` script is responsible for bulk inserting PDF data into MongoDB Cloud. It connects to your MongoDB database and efficiently uploads multiple PDF records in a single operation, improving performance and reducing the number of network calls.
+The `MongoDbManger.py` script is responsible for bulk inserting PDF data into MongoDB Cloud. It connects to  MongoDB database and efficiently uploads multiple PDF records in a single operation, improving performance and reducing the number of network calls.
 
-Ensure that your MongoDB Cloud connection details (such as the URI, database name, and collection name) are correctly configured in the appropriate configuration file (`config.py` or environment variables) before running this script.
 
 The `MongoDbManger.py` script is automatically run by the `script.sh` every 15 minutes as part of the process to upload PDFs to the cloud database.
 
@@ -79,7 +78,7 @@ The project provides a configuration file that allows you to set parameters to c
 
 To execute the project and run the Python scripts periodically, it is recommended to use **Bash** to run the `script.sh` file. Bash ensures compatibility across different environments and helps manage the script's infinite loop and timed execution.
 
-### Steps to run the script using Bash:
+### Steps to run the cron script using Bash:
 
 1. Ensure that your virtual environment is set up and all necessary dependencies are installed (the `venv` folder should exist in the project directory).
 2. Open a terminal and navigate to the project directory.
