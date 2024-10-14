@@ -135,5 +135,4 @@ async def main():
     await db_manager.close_connection()
 
 if __name__ == "__main__":
-    # 使用 asyncio.run() 来运行所有异步操作
     asyncio.run(main())

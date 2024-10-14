@@ -96,7 +96,8 @@ class PDFHandler:
                     "title": title,
                     "pdf_metadata": pdf_data['metadata'],
                     "pages": pdf_data['pages'],
-                    "csv_metadata": csv_metadata
+                    "csv_metadata": csv_metadata,
+                    "type" : "speech"
                 }
 
                 all_metadata.append(combined_metadata)

@@ -67,8 +67,17 @@ The project provides a configuration file that allows you to set parameters to c
 
 
 
+## 6. Running the script
 
+To run the project and execute the Python scripts periodically, you can use the `script.sh` file. This script is set up to run the necessary Python scripts every 15 minutes.
 
+### Steps to run the script:
 
+1. Ensure that your virtual environment is created and installed with all the necessary dependencies (`venv` folder should be in the project directory).
+2. Open a terminal and navigate to the project directory.
+3. Run the following command to start the script:
+
+   ```bash
+   ./script.sh
 
 
