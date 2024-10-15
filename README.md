@@ -88,6 +88,15 @@ To execute the project and run the Python scripts periodically, it is recommende
    ./script.sh
    ```
    
-   
+  
+ ## 8. Running the Company URL Generator and Crawler Controller
+
+To generate the list of URLs for the target web pages, you need to manually start the scripts responsible for each company. There is no adaptive script currently available for auto-configuration, so these scripts must be run individually.
+
+1. Start the scripts located in `Company/CompanyList/CompanyName/CompanyNameCrawler.py` to generate all target URLs.
+2. After generating the URLs, start `Company/Controller/CrawlerController.py` to initiate the multimodal web scraping processes. 
+
+   - **Note**: HTML downloading performance is currently suboptimal and may require further optimization.
+
 
 
