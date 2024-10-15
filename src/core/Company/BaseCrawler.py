@@ -41,8 +41,6 @@ class BaseCrawler(ABC):
             r"(?:#[^\s]*)?"                   # 匹配片段标识符（可选）
         )
 
-        # URL 文件路径
-        self.url_file_path = os.path.join(os.getenv('DATA_DIR', 'data'), 'metaData', f"{self.company_name}_urls.json")
 
     def setup_logger(self):
         logger = logging.getLogger(self.__class__.__name__)
@@ -103,10 +101,6 @@ class BaseCrawler(ABC):
 
             self.logger.info(f"Data successfully saved to {file_path}")
             print(f"Data successfully saved to {file_path}")
-
-            # 如果是 URL 数据，则还要保存到增量文件中
-            if file_suffix == "urls":
-                self.url_file_path = file_path  # 保存文件路径
         except Exception as e:
             self.logger.error(f"Error saving data: {e}")
             raise
@@ -123,18 +117,9 @@ class BaseCrawler(ABC):
         content = (self.data.get('markdown', "") + " " + self.data.get('html', "")).strip()
         all_urls = self.extract_urls(content)
 
-        # 加载现有的URL
-        existing_urls = self.load_existing_urls()
-
-        # 去重
-        new_urls = set(all_urls) - set(existing_urls)
-
-        if new_urls:
-            # 保存提取的 URL 到单独的文件，合并新旧URL
-            self.save_data({"urls": list(existing_urls | new_urls)}, "urls")
-            self.logger.info(f"Extracted {len(new_urls)} new URLs")
-        else:
-            self.logger.info("No new URLs extracted.")
+        # 保存提取的 URL 到单独的文件
+        self.save_data({"urls": all_urls}, "urls")
+        self.logger.info(f"Extracted {len(all_urls)} URLs")
 
     def extract_urls(self, data):
         cleaned_data = data.replace('\n', ' ').replace('\r', ' ')
@@ -145,21 +130,15 @@ class BaseCrawler(ABC):
         cleaned_urls = [url.rstrip(trailing_punctuations) for url in urls]
         valid_urls = [url for url in cleaned_urls if urlparse(url).scheme in ['http', 'https']]
 
-        # 使用 set 去重
-        return list(set(valid_urls))
-
-    def load_existing_urls(self):
-        """加载已经存在的 URL 文件，如果存在则返回 URL 列表，不存在则返回空列表"""
-        if os.path.exists(self.url_file_path):
-            try:
-                with open(self.url_file_path, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
-                    return set(data.get('urls', []))
-            except Exception as e:
-                self.logger.error(f"Error loading existing URLs: {e}")
-        return set()
+        return valid_urls
 
     def fetch_data_concurrently(self, urls):
         with ThreadPoolExecutor(max_workers=5) as executor:
             results = list(executor.map(self.call_firecrawler, urls))
         return results
+
+
+
+
+
+
