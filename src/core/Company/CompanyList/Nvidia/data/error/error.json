@@ -1,0 +1,107 @@
+[
+    {
+        "url": "https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/NVIDIA-logo.png%20%22Artificial%20Intelligence%20Computing%20Leadership%20from%20NVIDIA%22)](https://www.nvidia.com/en-us/",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/NVIDIA-logo.png%20%22Artificial%20Intelligence%20Computing%20Leadership%20from%20NVIDIA%22)](https://www.nvidia.com/en-us/. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/NVIDIA-logo.png%20%22Artificial%20Intelligence%20Computing%20Leadership%20from%20NVIDIA%22)%5D(https://www.nvidia.com/en-us/"
+    },
+    {
+        "url": "https://investor.nvidia.com/s201.q4cdn.com/141608511/files/images/2019/geforce-2080Ti-3qtr-front-left-fullres.png",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.nvidia.com/s201.q4cdn.com/141608511/files/images/2019/geforce-2080Ti-3qtr-front-left-fullres.png. Error: 404 Client Error: Not Found for url: https://investor.nvidia.com/s201.q4cdn.com/141608511/files/images/2019/geforce-2080Ti-3qtr-front-left-fullres.png"
+    },
+    {
+        "url": "https://events.q4inc.com/attendee/134543346",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://events.q4inc.com/attendee/134543346. Error: 'gbk' codec can't encode character '\\ufffd' in position 2: illegal multibyte sequence"
+    },
+    {
+        "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/Q225/Q2FY25-CFO-Commentary.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://s201.q4cdn.com/141608511/files/doc_financials/2025/Q225/Q2FY25-CFO-Commentary.pdf. Error: 'gbk' codec can't encode character '\\ufffd' in position 10: illegal multibyte sequence"
+    },
+    {
+        "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/Q225/Rev_by_Mkt_Qtrly_Trend_Q225.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://s201.q4cdn.com/141608511/files/doc_financials/2025/Q225/Rev_by_Mkt_Qtrly_Trend_Q225.pdf. Error: 'gbk' codec can't encode character '\\ufffd' in position 10: illegal multibyte sequence"
+    },
+    {
+        "url": "https://investor.nvidia.com/s201.q4cdn.com/141608511/files/images/2019/geforce-2080Ti-3qtr-front-left-fullres.png",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.nvidia.com/s201.q4cdn.com/141608511/files/images/2019/geforce-2080Ti-3qtr-front-left-fullres.png. Error: 404 Client Error: Not Found for url: https://investor.nvidia.com/s201.q4cdn.com/141608511/files/images/2019/geforce-2080Ti-3qtr-front-left-fullres.png"
+    },
+    {
+        "url": "https://events.q4inc.com/attendee/134543346",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://events.q4inc.com/attendee/134543346. Error: 'gbk' codec can't encode character '\\ufffd' in position 2: illegal multibyte sequence"
+    },
+    {
+        "url": "https://s201.q4cdn.com/141608511/files/doc_financials/2025/q2/78501ce3-7816-4c4d-8688-53dd140df456.pdf",
+        "file_type": "pdf",
+        "error": "Failed to extract text from PDF ../CompanyList/Nvidia/data\\pdf\\78501ce3-7816-4c4d-8688-53dd140df456.pdf. Error: 'gbk' codec can't encode character '\\u2612' in position 133: illegal multibyte sequence"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/email-alerts/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/email-alerts/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/email-alerts/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/rss/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/rss/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/rss/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/request-information/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/request-information/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/request-information/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/download-library/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/download-library/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/download-library/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/q4api/v4/captcha?clientId=_ctrl0_ctl36_UCCaptcha",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/q4api/v4/captcha?clientId=_ctrl0_ctl36_UCCaptcha. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/q4api/v4/captcha?clientId=_ctrl0_ctl36_UCCaptcha"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/faqs/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/faqs/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/faqs/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/stock-quote-and-chart/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/stock-quote-and-chart/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/stock-quote-and-chart/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/historical-price-lookup/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/historical-price-lookup/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/historical-price-lookup/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/investment-calculator/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/investment-calculator/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/investment-calculator/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/fundamentals/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/fundamentals/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/fundamentals/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/analyst-coverage/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/analyst-coverage/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/analyst-coverage/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/governance/management-team/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/governance/management-team/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/governance/management-team/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/governance/board-of-directors/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/governance/board-of-directors/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/governance/board-of-directors/default.aspx"
+    }
+]
