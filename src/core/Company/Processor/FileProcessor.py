@@ -141,8 +141,9 @@ class FileProcessor:
         time.sleep(random.uniform(1, 3))
 
         try:
-            # 下载 HTML 并转换为纯文本
+            # 下载 HTML 内容并设置正确的编码
             response = requests.get(self.url, headers=self.headers)
+            response.encoding = response.apparent_encoding  # 使用 requests 的编码检测功能
             response.raise_for_status()  # 检查响应状态
             html_content = response.text
 
@@ -157,7 +158,7 @@ class FileProcessor:
                 "text": text
             }
             data['entries'].append(new_entry)
-
+            print("the new enrty is", new_entry)
             # 保存更新后的数据回到 json 文件
             with open(json_file_path, 'w', encoding='utf-8') as json_file:
                 json.dump(data, json_file, ensure_ascii=False, indent=4)
