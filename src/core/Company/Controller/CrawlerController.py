@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
 import os
-import sys
 from datetime import datetime
 from src.core.Company.Dector.FileTypeDector import detect_file_type
 from src.core.Company.Processor.FileProcessor import FileProcessor
@@ -27,6 +26,7 @@ class CrawlerController:
         路径格式为：CompanyList/{company_name}/data/metaData/{company_name}_urls_{current_date}.json
         """
         current_date = datetime.now().strftime('%Y-%m-%d')
+        # 修改文件路径为正确的存储位置
         file_path = f"../CompanyList/{company_name}/data/metaData/{company_name}_urls_{current_date}.json"
 
         if not os.path.exists(file_path):
@@ -71,6 +71,7 @@ def process_workflow(company_name, url, file_type):
 
 
 if __name__ == "__main__":
-    company_list_file = '../CompanyList/CompanyPage.json'  # 目标公司 JSON 文件路径
+    # 将目标公司 JSON 文件路径更改为正确的位置
+    company_list_file = '../CompanyList/CompanyPage.json'
     crawler = CrawlerController(company_list_file)
     crawler.start_crawling()
