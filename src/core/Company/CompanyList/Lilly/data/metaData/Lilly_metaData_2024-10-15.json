@@ -7,10 +7,11 @@
         "language": "en",
         "ogTitle": "Investors | Eli Lilly and Company",
         "ogDescription": "The Investor Relations website contains information about Eli Lilly and Company's business for stockholders, potential investors, and financial analysts.",
-
+        "ogUrl": "https://investor.lilly.com/investor-relations",
+        "ogImage": "https://investor.lilly.com/static-files/414b590d-5fd8-4d74-bb91-284a3d77fb98",
         "ogLocaleAlternate": [],
         "ogSiteName": "Eli Lilly and Company",
-
+        "sourceURL": "https://investor.lilly.com/",
         "statusCode": 200
     }
 }
