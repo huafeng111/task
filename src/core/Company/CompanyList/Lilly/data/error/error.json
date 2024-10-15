@@ -1,0 +1,72 @@
+[
+    {
+        "url": "https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/IR-Carousel-woman-testing-04062020-Research15033-5048-01_2.jpg",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/IR-Carousel-woman-testing-04062020-Research15033-5048-01_2.jpg. Error: HTTPSConnectionPool(host='investor.lilly.com', port=443): Max retries exceeded with url: /sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/IR-Carousel-woman-testing-04062020-Research15033-5048-01_2.jpg (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+        "url": "https://www.lilly.com/news",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.lilly.com/news. Error: 403 Client Error: Forbidden for url: https://www.lilly.com/news"
+    },
+    {
+        "url": "https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/ir-pipeline.png",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/ir-pipeline.png. Error: HTTPSConnectionPool(host='investor.lilly.com', port=443): Max retries exceeded with url: /sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/ir-pipeline.png (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+        "url": "https://www.lilly.com/discovery/pipeline",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.lilly.com/discovery/pipeline. Error: 403 Client Error: Forbidden for url: https://www.lilly.com/discovery/pipeline"
+    },
+    {
+        "url": "https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/Quarterly_Results.png",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/Quarterly_Results.png. Error: HTTPSConnectionPool(host='investor.lilly.com', port=443): Max retries exceeded with url: /sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/Quarterly_Results.png (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+        "url": "https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/438x215+Investor.jpg",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/438x215+Investor.jpg. Error: HTTPSConnectionPool(host='investor.lilly.com', port=443): Max retries exceeded with url: /sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/438x215+Investor.jpg (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+        "url": "https://www.lilly.com/policies-reports/2023-year-in-review",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.lilly.com/policies-reports/2023-year-in-review. Error: 403 Client Error: Forbidden for url: https://www.lilly.com/policies-reports/2023-year-in-review"
+    },
+    {
+        "url": "https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/key-ratios.jpg",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/key-ratios.jpg. Error: HTTPSConnectionPool(host='investor.lilly.com', port=443): Max retries exceeded with url: /sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/key-ratios.jpg (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+        "url": "https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/SolarPanelFarm_shutterstock_691382056_38x215.png",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/SolarPanelFarm_shutterstock_691382056_38x215.png. Error: HTTPSConnectionPool(host='investor.lilly.com', port=443): Max retries exceeded with url: /sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/SolarPanelFarm_shutterstock_691382056_38x215.png (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+        "url": "https://esg.lilly.com/",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://esg.lilly.com/. Error: 403 Client Error: Forbidden for url: https://sustainability.lilly.com:443/"
+    },
+    {
+        "url": "https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/LillyMoments_Collaboration15033_0323_438x215.png",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.lilly.com/sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/LillyMoments_Collaboration15033_0323_438x215.png. Error: HTTPSConnectionPool(host='investor.lilly.com', port=443): Max retries exceeded with url: /sites/g/files/knoqqb54341/themes/site/nir_pid1228/dist/images/LillyMoments_Collaboration15033_0323_438x215.png (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+        "url": "https://esg.lilly.com/stories",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://esg.lilly.com/stories. Error: 403 Client Error: Forbidden for url: https://sustainability.lilly.com:443/stories"
+    },
+    {
+        "url": "https://investor.lilly.com/system/files-encrypted/nasdaq_kms/inline-images/alerts.jpg",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.lilly.com/system/files-encrypted/nasdaq_kms/inline-images/alerts.jpg. Error: HTTPSConnectionPool(host='investor.lilly.com', port=443): Max retries exceeded with url: /system/files-encrypted/nasdaq_kms/inline-images/alerts.jpg (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))"
+    },
+    {
+        "url": "https://ogp.me/ns#",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ogp.me/ns#. Error: 404 Client Error: Not Found for url: https://ogp.me/ns/"
+    }
+]

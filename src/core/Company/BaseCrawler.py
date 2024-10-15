@@ -141,15 +141,25 @@ class BaseCrawler(ABC):
         self.logger.info(f"Extracted {len(all_urls)} URLs")
 
     def extract_urls(self, data):
+        # 将数据中的换行和回车替换为空格
         cleaned_data = data.replace('\n', ' ').replace('\r', ' ')
+
+        # 使用正则表达式提取 URL
         urls = re.findall(self.url_pattern, cleaned_data)
 
-        # 清理 URL 并验证其合法性
+        # 清理 URL 并验证其合法性，删除 URL 后的无效字符
         trailing_punctuations = '.,);\'"!?'
-        cleaned_urls = [url.rstrip(trailing_punctuations) for url in urls]
-        valid_urls = [url for url in cleaned_urls if urlparse(url).scheme in ['http', 'https']]
+        cleaned_urls = []
+        for url in urls:
+            # 处理掉 "\" 或其他无效部分后面的字符
+            url = re.split(r'[\\>\s]', url)[0]
+            cleaned_url = url.rstrip(trailing_punctuations)
+            # 验证 URL 合法性
+            if urlparse(cleaned_url).scheme in ['http', 'https']:
+                cleaned_urls.append(cleaned_url)
 
-        return valid_urls
+        return cleaned_urls
+
 
     def fetch_data_concurrently(self, urls):
         with ThreadPoolExecutor(max_workers=5) as executor:
