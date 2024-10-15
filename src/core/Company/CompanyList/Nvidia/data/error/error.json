@@ -1,0 +1,147 @@
+[
+    {
+        "url": "https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/NVIDIA-logo.png%20%22Artificial%20Intelligence%20Computing%20Leadership%20from%20NVIDIA%22)](https://www.nvidia.com/en-us/",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/NVIDIA-logo.png%20%22Artificial%20Intelligence%20Computing%20Leadership%20from%20NVIDIA%22)](https://www.nvidia.com/en-us/. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/NVIDIA-logo.png%20%22Artificial%20Intelligence%20Computing%20Leadership%20from%20NVIDIA%22)%5D(https://www.nvidia.com/en-us/"
+    },
+    {
+        "url": "https://investor.nvidia.com/s201.q4cdn.com/141608511/files/images/2019/geforce-2080Ti-3qtr-front-left-fullres.png",
+        "file_type": "image",
+        "error": "Failed to download image from https://investor.nvidia.com/s201.q4cdn.com/141608511/files/images/2019/geforce-2080Ti-3qtr-front-left-fullres.png. Error: 404 Client Error: Not Found for url: https://investor.nvidia.com/s201.q4cdn.com/141608511/files/images/2019/geforce-2080Ti-3qtr-front-left-fullres.png"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/email-alerts/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/email-alerts/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/email-alerts/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/rss/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/rss/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/rss/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/request-information/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/request-information/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/request-information/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/download-library/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/download-library/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/download-library/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/q4api/v4/captcha?clientId=_ctrl0_ctl36_UCCaptcha",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/q4api/v4/captcha?clientId=_ctrl0_ctl36_UCCaptcha. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/q4api/v4/captcha?clientId=_ctrl0_ctl36_UCCaptcha"
+    },
+    {
+        "url": "https://investor.nvidia.com/investor-resources/faqs/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/investor-resources/faqs/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/investor-resources/faqs/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/stock-quote-and-chart/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/stock-quote-and-chart/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/stock-quote-and-chart/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/historical-price-lookup/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/historical-price-lookup/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/historical-price-lookup/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/investment-calculator/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/investment-calculator/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/investment-calculator/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/fundamentals/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/fundamentals/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/fundamentals/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/stock-info/analyst-coverage/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/stock-info/analyst-coverage/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/stock-info/analyst-coverage/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/governance/management-team/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/governance/management-team/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/governance/management-team/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/governance/board-of-directors/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/governance/board-of-directors/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/governance/board-of-directors/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/governance/governance-documents/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/governance/governance-documents/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/governance/governance-documents/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/governance/committee-composition/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/governance/committee-composition/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/governance/committee-composition/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/governance/contact-the-board/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/governance/contact-the-board/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/governance/contact-the-board/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/events-and-presentations/events-and-presentations/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/events-and-presentations/events-and-presentations/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/events-and-presentations/events-and-presentations/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/financial-info/financial-reports/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/financial-info/financial-reports/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/financial-info/financial-reports/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/financial-info/sec-filings/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/financial-info/sec-filings/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/financial-info/sec-filings/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/financial-info/quarterly-results/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/financial-info/quarterly-results/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/financial-info/quarterly-results/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/financial-info/annual-reports-and-proxies/default.aspx",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/financial-info/annual-reports-and-proxies/default.aspx. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/financial-info/annual-reports-and-proxies/default.aspx"
+    },
+    {
+        "url": "https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/Facebook-icon.svg%20%22Facebook%22)](https://www.facebook.com/NVIDIA/",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/Facebook-icon.svg%20%22Facebook%22)](https://www.facebook.com/NVIDIA/. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/Facebook-icon.svg%20%22Facebook%22)%5D(https://www.facebook.com/NVIDIA/"
+    },
+    {
+        "url": "https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/Twitter-icon.svg%20%22Twitter%22)](https://twitter.com/nvidia",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/Twitter-icon.svg%20%22Twitter%22)](https://twitter.com/nvidia. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/Twitter-icon.svg%20%22Twitter%22)%5D(https://twitter.com/nvidia"
+    },
+    {
+        "url": "https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/You-Tube-icon.svg%20%22You%20Tube%22)](https://www.youtube.com/user/nvidia",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/You-Tube-icon.svg%20%22You%20Tube%22)](https://www.youtube.com/user/nvidia. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/You-Tube-icon.svg%20%22You%20Tube%22)%5D(https://www.youtube.com/user/nvidia"
+    },
+    {
+        "url": "https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/Twitch-icon.svg%20%22Twitch%20TV%22)](https://www.twitch.tv/nvidia",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/Twitch-icon.svg%20%22Twitch%20TV%22)](https://www.twitch.tv/nvidia. Error: 403 Client Error: Forbidden for url: https://investor.nvidia.com/s201.q4cdn.com/141608511/files/design/social/Twitch-icon.svg%20%22Twitch%20TV%22)%5D(https://www.twitch.tv/nvidia"
+    },
+    {
+        "url": "https://www.q4inc.com/Powered-by-Q4/",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.q4inc.com/Powered-by-Q4/. Error: 403 Client Error: Forbidden for url: https://www.q4inc.com/Powered-by-Q4/"
+    },
+    {
+        "url": "https://login.q4inc.com/authorize?client_id=gKrDY1E9BUSWfU7DGuW2CO4rjdskiNg7&amp;pendoQ4PId=_q4pidval_&amp;projectId=studio&amp;step=login&amp;companyName=NVIDIA+Corporation&amp;projectIdentifier=NVIDIA+Corporation&amp;mainColor=%230F5CA3&amp;scope=openid+profile+email&amp;helpUrl=https%3a%2f%2fhelp.events.q4inc.com%2fen%2fir-website.html&amp;response_type=code&amp;response_mode=query&amp;nonce=QYG5RE99GpQWqYtReO9v7CRMDE4&amp;skipUrl=https%3a%2f%2finvestor.nvidia.com%2fhome%2fdefault.aspx&amp;userEmail=_q4lemail_&amp;redirect_uri=https%3a%2f%2fauth.platform.q4inc.com%2fauth%2fpublicAuthRedirect%3fstate%3deyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJyZXR1cm5VcmwiOiJodHRwczovL2ludmVzdG9yLm52aWRpYS5jb20vaG9tZS9kZWZhdWx0LmFzcHgiLCJleHAiOjE3MzQyNDgxMDguMCwiaWF0IjoxNzI4OTg4NTA4LjAsImlzcyI6IlE0LldlYi5QdWJsaWMuU2l0ZSIsImF1ZCI6InVwc3RyZWFtLmNkbi53ZWIucHJkLnE0aW5jLmNvbSJ9.UwSjVJgXtL30RgD04rx9A8UKIEufWwmEx6oz3yRf8gE",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://login.q4inc.com/authorize?client_id=gKrDY1E9BUSWfU7DGuW2CO4rjdskiNg7&amp;pendoQ4PId=_q4pidval_&amp;projectId=studio&amp;step=login&amp;companyName=NVIDIA+Corporation&amp;projectIdentifier=NVIDIA+Corporation&amp;mainColor=%230F5CA3&amp;scope=openid+profile+email&amp;helpUrl=https%3a%2f%2fhelp.events.q4inc.com%2fen%2fir-website.html&amp;response_type=code&amp;response_mode=query&amp;nonce=QYG5RE99GpQWqYtReO9v7CRMDE4&amp;skipUrl=https%3a%2f%2finvestor.nvidia.com%2fhome%2fdefault.aspx&amp;userEmail=_q4lemail_&amp;redirect_uri=https%3a%2f%2fauth.platform.q4inc.com%2fauth%2fpublicAuthRedirect%3fstate%3deyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJyZXR1cm5VcmwiOiJodHRwczovL2ludmVzdG9yLm52aWRpYS5jb20vaG9tZS9kZWZhdWx0LmFzcHgiLCJleHAiOjE3MzQyNDgxMDguMCwiaWF0IjoxNzI4OTg4NTA4LjAsImlzcyI6IlE0LldlYi5QdWJsaWMuU2l0ZSIsImF1ZCI6InVwc3RyZWFtLmNkbi53ZWIucHJkLnE0aW5jLmNvbSJ9.UwSjVJgXtL30RgD04rx9A8UKIEufWwmEx6oz3yRf8gE. Error: 400 Client Error: Bad Request for url: https://login.q4inc.com/authorize?client_id=gKrDY1E9BUSWfU7DGuW2CO4rjdskiNg7&amp;pendoQ4PId=_q4pidval_&amp;projectId=studio&amp;step=login&amp;companyName=NVIDIA+Corporation&amp;projectIdentifier=NVIDIA+Corporation&amp;mainColor=%230F5CA3&amp;scope=openid+profile+email&amp;helpUrl=https%3A%2F%2Fhelp.events.q4inc.com%2Fen%2Fir-website.html&amp;response_type=code&amp;response_mode=query&amp;nonce=QYG5RE99GpQWqYtReO9v7CRMDE4&amp;skipUrl=https%3A%2F%2Finvestor.nvidia.com%2Fhome%2Fdefault.aspx&amp;userEmail=_q4lemail_&amp;redirect_uri=https%3A%2F%2Fauth.platform.q4inc.com%2Fauth%2FpublicAuthRedirect%3Fstate%3DeyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJyZXR1cm5VcmwiOiJodHRwczovL2ludmVzdG9yLm52aWRpYS5jb20vaG9tZS9kZWZhdWx0LmFzcHgiLCJleHAiOjE3MzQyNDgxMDguMCwiaWF0IjoxNzI4OTg4NTA4LjAsImlzcyI6IlE0LldlYi5QdWJsaWMuU2l0ZSIsImF1ZCI6InVwc3RyZWFtLmNkbi53ZWIucHJkLnE0aW5jLmNvbSJ9.UwSjVJgXtL30RgD04rx9A8UKIEufWwmEx6oz3yRf8gE"
+    }
+]

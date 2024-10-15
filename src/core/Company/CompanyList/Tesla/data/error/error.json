@@ -1,0 +1,447 @@
+[
+    {
+        "url": "https://livestream.tesla.com/",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://livestream.tesla.com/. Error: 403 Client Error: Forbidden for url: https://livestream.tesla.com/"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000162828024032662/tsla-20240630.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024017503/tsla-20240331.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000162828024017503/tsla-20240331.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000162828024017503/tsla-20240331.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828024002390/tsla-20231231.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000162828024002390/tsla-20231231.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000162828024002390/tsla-20231231.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000162828023034847/tsla-20230930.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000162828023034847/tsla-20230930.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000162828023034847/tsla-20230930.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017023033872/tsla-20230630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017023033872/tsla-20230630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017023033872/tsla-20230630.htm"
+    },
+    {
+        "url": "https://ir.tesla.com/webcast-2023-04-19)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ir.tesla.com/webcast-2023-04-19)<br. Error: 403 Client Error: Forbidden for url: https://ir.tesla.com/webcast-2023-04-19)%3Cbr"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017023013890/tsla-20230331.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017023013890/tsla-20230331.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017023013890/tsla-20230331.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017023001409/tsla-20221231.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017023001409/tsla-20221231.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017023001409/tsla-20221231.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022019867/tsla-20220930.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017022019867/tsla-20220930.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017022019867/tsla-20220930.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022012936/tsla-20220630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017022012936/tsla-20220630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017022012936/tsla-20220630.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022006034/tsla-20220331.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017022006034/tsla-20220331.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017022006034/tsla-20220331.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017022000796/tsla-20211231.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017022000796/tsla-20211231.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017022000796/tsla-20211231.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017021002253/tsla-20210930.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017021002253/tsla-20210930.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017021002253/tsla-20210930.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017021000524/tsla-20210630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017021000524/tsla-20210630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017021000524/tsla-20210630.htm"
+    },
+    {
+        "url": "https://ir.tesla.com/webcast-2021-04-26)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ir.tesla.com/webcast-2021-04-26)<br. Error: 403 Client Error: Forbidden for url: https://ir.tesla.com/webcast-2021-04-26)%3Cbr"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data/1318605/000095017021000046/tsla-20210331.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data/1318605/000095017021000046/tsla-20210331.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data/1318605/000095017021000046/tsla-20210331.htm"
+    },
+    {
+        "url": "https://ir.tesla.com/webcast-2021-01-27)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ir.tesla.com/webcast-2021-01-27)<br. Error: 403 Client Error: Forbidden for url: https://ir.tesla.com/webcast-2021-01-27)%3Cbr"
+    },
+    {
+        "url": "https://ir.tesla.com/webcast-2020-10-21)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ir.tesla.com/webcast-2020-10-21)<br. Error: 403 Client Error: Forbidden for url: https://ir.tesla.com/webcast-2020-10-21)%3Cbr"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459020047486/tsla-10q_20200930.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459020047486/tsla-10q_20200930.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459020047486/tsla-10q_20200930.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459020033670/tsla-10q_20200630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459020033670/tsla-10q_20200630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459020033670/tsla-10q_20200630.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459020019931/tsla-10q_20200331.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459020019931/tsla-10q_20200331.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459020019931/tsla-10q_20200331.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459020004475/tsla-10k_20191231.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459020004475/tsla-10k_20191231.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459020004475/tsla-10k_20191231.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459019038256/tsla-10q_20190930.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459019038256/tsla-10q_20190930.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459019038256/tsla-10q_20190930.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459019026445/tsla-10q_20190630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459019026445/tsla-10q_20190630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459019026445/tsla-10q_20190630.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459019013462/tsla-10q_20190331.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459019013462/tsla-10q_20190331.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459019013462/tsla-10q_20190331.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459019003165/tsla-10k_20181231.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459019003165/tsla-10k_20181231.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459019003165/tsla-10k_20181231.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459018026353/tsla-10q_20180930.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459018026353/tsla-10q_20180930.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459018026353/tsla-10q_20180930.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459018019254/tsla-10q_20180630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459018019254/tsla-10q_20180630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459018019254/tsla-10q_20180630.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459018011086/tsla-10q_20180331.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459018011086/tsla-10q_20180331.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459018011086/tsla-10q_20180331.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459018002956/tsla-10k_20171231.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459018002956/tsla-10k_20171231.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459018002956/tsla-10k_20171231.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459017021343/tsla-10q_20170930.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459017021343/tsla-10q_20170930.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459017021343/tsla-10q_20170930.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459017015705/tsla-10q_20170630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459017015705/tsla-10q_20170630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459017015705/tsla-10q_20170630.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459017003118/tsla-10k_20161231.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459017003118/tsla-10k_20161231.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459017003118/tsla-10k_20161231.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459016026820/tsla-10q_20160930.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459016026820/tsla-10q_20160930.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459016026820/tsla-10q_20160930.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459016023024/tsla-10q_20160630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459016023024/tsla-10q_20160630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459016023024/tsla-10q_20160630.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459016013195/tsla-10k_20151231.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459016013195/tsla-10k_20151231.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459016013195/tsla-10k_20151231.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459015009741/tsla-10q_20150930.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459015009741/tsla-10q_20150930.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459015009741/tsla-10q_20150930.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459015006666/tsla-10q_20150630.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459015006666/tsla-10q_20150630.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459015006666/tsla-10q_20150630.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459015003789/tsla-10q_20150331.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459015003789/tsla-10q_20150331.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459015003789/tsla-10q_20150331.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000156459015001031/tsla-10k_20141231.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000156459015001031/tsla-10k_20141231.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000156459015001031/tsla-10k_20141231.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312514403635/d812482d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312514403635/d812482d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312514403635/d812482d10q.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312514303175/d766922d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312514303175/d766922d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312514303175/d766922d10q.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312514192606/d715897d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312514192606/d715897d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312514192606/d715897d10q.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312514069681/d668062d10k.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312514069681/d668062d10k.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312514069681/d668062d10k.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312513435480/d588506d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312513435480/d588506d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312513435480/d588506d10q.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312513327916/d549636d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312513327916/d549636d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312513327916/d549636d10q.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312513096241/d452995d10k.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312513096241/d452995d10k.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312513096241/d452995d10k.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312512457610/d410318d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312512457610/d410318d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312512457610/d410318d10q.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312512332138/d364775d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312512332138/d364775d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312512332138/d364775d10q.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312512225825/d325967d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312512225825/d325967d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312512225825/d325967d10q.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312512081990/d279413d10k.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312512081990/d279413d10k.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312512081990/d279413d10k.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312511308489/d226201d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312511308489/d226201d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312511308489/d226201d10q.htm"
+    },
+    {
+        "url": "https://www.sec.gov/Archives/edgar/data//1318605/000119312511221497/d10q.htm",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.sec.gov/Archives/edgar/data//1318605/000119312511221497/d10q.htm. Error: 403 Client Error: Forbidden for url: https://www.sec.gov/Archives/edgar/data//1318605/000119312511221497/d10q.htm"
+    },
+    {
+        "url": "https://www.tesla.com/2024shareholdermeeting",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/2024shareholdermeeting. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/2024shareholdermeeting"
+    },
+    {
+        "url": "https://www.tesla.com/2023shareholdermeeting",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/2023shareholdermeeting. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/2023shareholdermeeting"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2023-tesla-impact-report.pdf)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/ns_videos/2023-tesla-impact-report.pdf)<br. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2023-tesla-impact-report.pdf)%3Cbr"
+    },
+    {
+        "url": "https://www.tesla.com/2022shareholdermeeting",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/2022shareholdermeeting. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/2022shareholdermeeting"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2022-tesla-impact-report.pdf)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/ns_videos/2022-tesla-impact-report.pdf)<br. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2022-tesla-impact-report.pdf)%3Cbr"
+    },
+    {
+        "url": "https://digitalassets.tesla.com/tesla-contents/image/upload/Form-8937)<br",
+        "file_type": "image",
+        "error": "Failed to download image from https://digitalassets.tesla.com/tesla-contents/image/upload/Form-8937)<br. Error: 400 Client Error: Bad Request for url: https://digitalassets.tesla.com/tesla-contents/image/upload/Form-8937)%3Cbr"
+    },
+    {
+        "url": "https://www.tesla.com/2021shareholdermeeting",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/2021shareholdermeeting. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/2021shareholdermeeting"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2021-tesla-impact-report.pdf)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/ns_videos/2021-tesla-impact-report.pdf)<br. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2021-tesla-impact-report.pdf)%3Cbr"
+    },
+    {
+        "url": "https://www.tesla.com/2020shareholdermeeting",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/2020shareholdermeeting. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/2020shareholdermeeting"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2020-tesla-impact-report.pdf)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/ns_videos/2020-tesla-impact-report.pdf)<br. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2020-tesla-impact-report.pdf)%3Cbr"
+    },
+    {
+        "url": "https://www.tesla.com/2019shareholdermeeting",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/2019shareholdermeeting. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/2019shareholdermeeting"
+    },
+    {
+        "url": "https://www.tesla.com/blog/35000-tesla-model-3-available-now)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/blog/35000-tesla-model-3-available-now)<br. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/blog/35000-tesla-model-3-available-now)%3Cbr"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2019-tesla-impact-report.pdf)<br",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/ns_videos/2019-tesla-impact-report.pdf)<br. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2019-tesla-impact-report.pdf)%3Cbr"
+    },
+    {
+        "url": "https://www.tesla.com/2018shareholdermeeting",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/2018shareholdermeeting. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/2018shareholdermeeting"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2018-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2018-tesla-impact-report.pdf. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2018-tesla-impact-report.pdf"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2018-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2018-tesla-impact-report.pdf."
+    },
+    {
+        "url": "https://www.tesla.com/2017shareholdermeeting",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/2017shareholdermeeting. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/2017shareholdermeeting"
+    },
+    {
+        "url": "https://www.tesla.com/2016shareholdermeeting",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/2016shareholdermeeting. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/2016shareholdermeeting"
+    },
+    {
+        "url": "https://digitalassets.tesla.com/tesla-contents/video/upload/f_auto,q_auto:best/2016-Special-Meeting-of-Shareholders.mp4)<br",
+        "file_type": "image",
+        "error": "Failed to download image from https://digitalassets.tesla.com/tesla-contents/video/upload/f_auto,q_auto:best/2016-Special-Meeting-of-Shareholders.mp4)<br. Error: 400 Client Error: Bad Request for url: https://digitalassets.tesla.com/tesla-contents/video/upload/f_auto,q_auto:best/2016-Special-Meeting-of-Shareholders.mp4)%3Cbr"
+    },
+    {
+        "url": "https://ogp.me/ns#",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ogp.me/ns#. Error: 404 Client Error: Not Found for url: https://ogp.me/ns/"
+    },
+    {
+        "url": "https://ir.tesla.com/webcast-2023-04-19",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ir.tesla.com/webcast-2023-04-19. Error: 403 Client Error: Forbidden for url: https://ir.tesla.com/webcast-2023-04-19"
+    },
+    {
+        "url": "https://ir.tesla.com/webcast-2021-04-26",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ir.tesla.com/webcast-2021-04-26. Error: 403 Client Error: Forbidden for url: https://ir.tesla.com/webcast-2021-04-26"
+    },
+    {
+        "url": "https://ir.tesla.com/webcast-2021-01-27",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ir.tesla.com/webcast-2021-01-27. Error: 403 Client Error: Forbidden for url: https://ir.tesla.com/webcast-2021-01-27"
+    },
+    {
+        "url": "https://ir.tesla.com/webcast-2020-10-21",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://ir.tesla.com/webcast-2020-10-21. Error: 403 Client Error: Forbidden for url: https://ir.tesla.com/webcast-2020-10-21"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2023-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2023-tesla-impact-report.pdf. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2023-tesla-impact-report.pdf"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2023-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2023-tesla-impact-report.pdf."
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2022-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2022-tesla-impact-report.pdf. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2022-tesla-impact-report.pdf"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2022-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2022-tesla-impact-report.pdf."
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2021-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2021-tesla-impact-report.pdf. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2021-tesla-impact-report.pdf"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2021-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2021-tesla-impact-report.pdf."
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2020-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2020-tesla-impact-report.pdf. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2020-tesla-impact-report.pdf"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2020-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2020-tesla-impact-report.pdf."
+    },
+    {
+        "url": "https://www.tesla.com/blog/35000-tesla-model-3-available-now",
+        "file_type": "html",
+        "error": "Failed to process HTML from https://www.tesla.com/blog/35000-tesla-model-3-available-now. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/blog/35000-tesla-model-3-available-now"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2019-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2019-tesla-impact-report.pdf. Error: 403 Client Error: Forbidden for url: https://www.tesla.com/ns_videos/2019-tesla-impact-report.pdf"
+    },
+    {
+        "url": "https://www.tesla.com/ns_videos/2019-tesla-impact-report.pdf",
+        "file_type": "pdf",
+        "error": "Failed to download PDF from https://www.tesla.com/ns_videos/2019-tesla-impact-report.pdf."
+    }
+]
