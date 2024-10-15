@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import json
 import os
-import requests
+import sys
 from datetime import datetime
-from ..Dector.FileTypeDector import detect_file_type
+from src.core.Company.Dector.FileTypeDector import detect_file_type
+from src.core.Company.Processor.FileProcessor import FileProcessor
+
 
 class CrawlerController:
     def __init__(self, company_list_file):
@@ -25,7 +27,7 @@ class CrawlerController:
         路径格式为：CompanyList/{company_name}/data/metaData/{company_name}_urls_{current_date}.json
         """
         current_date = datetime.now().strftime('%Y-%m-%d')
-        file_path = f"CompanyList/{company_name}/data/metaData/{company_name}_urls_{current_date}.json"
+        file_path = f"../CompanyList/{company_name}/data/metaData/{company_name}_urls_{current_date}.json"
 
         if not os.path.exists(file_path):
             print(f"URL 文件未找到: {file_path}")
@@ -57,17 +59,18 @@ class CrawlerController:
                 print(f"Processing URL: {url}, detected as {file_type}")
 
                 # 根据文件类型调用相应的工作流处理
-                process_workflow(url, file_type)
+                process_workflow(company_name, url, file_type)
 
-def process_workflow(url, file_type):
+
+def process_workflow(company_name, url, file_type):
     """
-    根据文件类型处理 URL 的工作流函数占位符。
-    实际实现可以根据需求进行处理，如下载文件或进行解析等操作。
+    根据文件类型处理 URL 的工作流函数。
     """
-    print(f"Processing {file_type} workflow for URL: {url}")
-    # TODO: 添加具体工作流逻辑，例如下载、解析等操作
+    file_processor = FileProcessor(company_name, url, file_type)
+    file_processor.process()
+
 
 if __name__ == "__main__":
-    company_list_file = 'CompanyList/CompanyPage.json'  # 目标公司 JSON 文件路径
+    company_list_file = '../CompanyList/CompanyPage.json'  # 目标公司 JSON 文件路径
     crawler = CrawlerController(company_list_file)
     crawler.start_crawling()

@@ -26,13 +26,13 @@ class BaseCrawler(ABC):
         try:
             if self.firecrawl_app:
                 self.data = self.call_firecrawler(self.url)
-                self.logger.info(f"成功从 {self.url} 获取数据")
+                self.logger.info(f"Successfully fetched data from {self.url}")
             else:
-                self.logger.error("FirecrawlApp 未初始化，无法抓取数据。")
+                self.logger.error("FirecrawlApp not initialized, cannot fetch data.")
                 raise ValueError("FirecrawlApp is not initialized")
 
         except Exception as e:
-            self.logger.error(f"从 {self.url} 获取数据时出错: {e}")
+            self.logger.error(f"Error fetching data from {self.url}: {e}")
             raise
 
     def call_firecrawler(self, url):
@@ -43,16 +43,17 @@ class BaseCrawler(ABC):
                     'formats': ['markdown', 'html']
                 }
             )
-            self.logger.info(f"Firecrawl 抓取成功: {scrape_result}")
+            self.logger.info(f"Firecrawl successfully scraped: {scrape_result}")
             return scrape_result
         except Exception as e:
-            self.logger.error(f"调用 Firecrawl 失败: {e}")
+            self.logger.error(f"Failed to call Firecrawl: {e}")
             raise
 
     def save_data(self, data, file_suffix):
         """
-        保存抓取到的数据或提取的 URL 到一个 JSON 文件。
-        文件名根据公司名和当前日期生成，并使用提供的后缀区分不同数据。
+        Save the scraped data or extracted URLs to a JSON file.
+        The filename is generated based on the company name and current date,
+        with the provided suffix used to distinguish different data.
         """
         if data:
             try:
@@ -71,62 +72,63 @@ class BaseCrawler(ABC):
                 with open(file_path, 'w', encoding='utf-8') as f:
                     json.dump(data, f, ensure_ascii=False, indent=4)
 
-                self.logger.info(f"数据成功保存到 {file_path}")
+                self.logger.info(f"Data successfully saved to {file_path}")
                 print(f"Data successfully saved to {file_path}")
 
             except Exception as e:
-                self.logger.error(f"保存数据时出错: {e}")
+                self.logger.error(f"Error saving data: {e}")
                 raise
         else:
-            self.logger.warning("没有可保存的数据")
+            self.logger.warning("No data to save.")
 
     def process_data(self):
         """
-        处理抓取到的数据，提取页面中的所有 URL 并存储。
+        Process the scraped data, extract all URLs from the page, and save them.
         """
         if self.data:
-            # 保存原始抓取数据
+            # Save the original scraped data
             self.save_data(self.data, "metaData")
 
-            # 提取 URL
+            # Extract URLs
             if isinstance(self.data, dict):
                 content_markdown = self.data.get('markdown', "")
                 content_html = self.data.get('html', "")
 
-                # 提取 markdown 和 html 中的 URLs
+                # Extract URLs from markdown and html content
                 urls_markdown = self.extract_urls(content_markdown)
                 urls_html = self.extract_urls(content_html)
 
-                # 合并两部分提取的 URL，并去重
+                # Merge both sets of URLs and remove duplicates
                 all_urls = list(set(urls_markdown + urls_html))
             else:
                 all_urls = self.extract_urls(str(self.data))
 
-            # 将提取的 URL 另存为 URL 文件
+            # Save the extracted URLs to a separate file
             self.save_data({"urls": all_urls}, "urls")
-            self.logger.info(f"提取到 {len(all_urls)} 个 URL")
+            self.logger.info(f"Extracted {len(all_urls)} URLs")
 
         else:
-            self.logger.warning("没有数据可供处理。")
+            self.logger.warning("No data to process.")
 
     def extract_urls(self, data):
         """
-        使用正则表达式从抓取到的文本中提取所有的 URL，并移除尾随的标点符号。
+        Use a regular expression to extract all URLs from the scraped text,
+        and remove any trailing punctuation.
         """
-        # 首先移除掉换行符，避免分隔URL
+        # First, remove newline characters to avoid splitting URLs
         cleaned_data = data.replace('\n', ' ').replace('\r', ' ')
 
-        # 改进后的正则表达式来捕获更多的URL
+        # Improved regular expression to capture more URLs
         url_pattern = re.compile(r'https?://[^\s"\'<>]+')
         urls = re.findall(url_pattern, cleaned_data)
 
-        # 定义需要移除的尾随标点符号
+        # Define the trailing punctuation that needs to be removed
         trailing_punctuations = '.,);\'"!?'
 
-        # 清理每个 URL，移除尾随的标点符号
+        # Clean each URL by removing trailing punctuation
         cleaned_urls = [url.rstrip(trailing_punctuations) for url in urls]
 
-        # 过滤掉空字符串（如果有）
+        # Filter out empty strings (if any)
         cleaned_urls = [url for url in cleaned_urls if url]
 
         return cleaned_urls
