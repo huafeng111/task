@@ -41,6 +41,25 @@ class BaseCrawler(ABC):
             r"(?:#[^\s]*)?"                   # 匹配片段标识符（可选）
         )
 
+    def load_existing_urls(self):
+        """加载已经保存的 URL 文件，如果存在的话"""
+        current_date = datetime.now().strftime('%Y-%m-%d')
+        file_name = f"{self.company_name}_urls_{current_date}.json"
+        directory = os.path.join(os.getenv('DATA_DIR', 'data'), 'metaData')
+        file_path = os.path.join(directory, file_name)
+
+        if os.path.exists(file_path):
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    existing_urls = data.get('urls', [])
+                    self.logger.info(f"Successfully loaded existing URLs from {file_path}")
+                    return existing_urls
+            except Exception as e:
+                self.logger.error(f"Error loading existing URLs: {e}")
+        else:
+            self.logger.info(f"No existing URL file found at {file_path}")
+        return []
 
     def setup_logger(self):
         logger = logging.getLogger(self.__class__.__name__)
@@ -90,7 +109,7 @@ class BaseCrawler(ABC):
         try:
             current_date = datetime.now().strftime('%Y-%m-%d')
             url_hash = hashlib.md5(self.url.encode()).hexdigest()  # 使用URL的MD5哈希作为文件名的一部分
-            file_name = f"{self.company_name}_{file_suffix}_{url_hash}_{current_date}.json"
+            file_name = f"{self.company_name}_{file_suffix}_{current_date}.json"
             directory = os.path.join(os.getenv('DATA_DIR', 'data'), 'metaData')
             os.makedirs(directory, exist_ok=True)
 
@@ -137,6 +156,39 @@ class BaseCrawler(ABC):
             results = list(executor.map(self.call_firecrawler, urls))
         return results
 
+    def save_unique_urls(self, new_urls):
+        """保存新的 URL 并确保没有重复"""
+        existing_urls = self.load_existing_urls()
+
+        # 保持顺序，逐个检查新 URL 是否已经在 existing_urls 中
+        for url in new_urls:
+            if url not in existing_urls:
+                existing_urls.append(url)
+
+        # 如果没有新的 URL 要保存，直接返回
+        if len(existing_urls) == len(new_urls):
+            self.logger.info("No new URLs to append, all URLs are already in the list.")
+            return
+
+        # 保存更新后的 URL 列表
+        self.save_data({"urls": existing_urls}, "urls")
+        self.logger.info(f"Appended {len(existing_urls) - len(new_urls)} new URLs. Total URLs: {len(existing_urls)}")
+
+
+    def process_data(self):
+        if not self.data:
+            self.logger.warning("No data to process.")
+            return
+
+        # 保存原始抓取的数据
+        self.save_data(self.data, "metaData")
+
+        # 合并 HTML 和 Markdown 内容进行处理
+        content = (self.data.get('markdown', "") + " " + self.data.get('html', "")).strip()
+        all_urls = self.extract_urls(content)
+
+        # 保存去重后的 URL，并保持顺序
+        self.save_unique_urls(all_urls)
 
 
 
