@@ -4,10 +4,8 @@ from src.core.Company.BaseCrawler import BaseCrawler
 
 class TeslaCrawler(BaseCrawler):
     def __init__(self, url, firecrawl_api_key):
-        # 调用父类的构造函数，初始化 url 和 firecrawl_api_key
-        super().__init__(url, firecrawl_api_key)
-
-
+        # 调用父类的构造函数，初始化 url、firecrawl_api_key 和 company_name
+        super().__init__(url, firecrawl_api_key, company_name="Tesla")
 
 if __name__ == "__main__":
     url = 'https://ir.tesla.com/'
@@ -21,4 +19,3 @@ if __name__ == "__main__":
 
     # 处理数据
     tesla_crawler.process_data()
-

@@ -130,7 +130,3 @@ class BaseCrawler(ABC):
         cleaned_urls = [url for url in cleaned_urls if url]
 
         return cleaned_urls
-
-
-
-
