@@ -62,7 +62,7 @@ class BaseCrawler(ABC):
                     self.company_name = "unknown_company"
 
                 file_name = f"{self.company_name}_{file_suffix}_{current_date}.json"
-                directory = os.path.join('data')
+                directory = os.path.join('data', 'metaData')
                 if not os.path.exists(directory):
                     os.makedirs(directory)
 
