@@ -1,7 +1,7 @@
 import requests
 
 def detect_file_type(url):
-    # 根据 URL 扩展名进行初步检测（忽略大小写）
+    # Perform initial detection based on URL extension (case insensitive)
     url_lower = url.lower()
 
     if url_lower.endswith('.pdf'):
@@ -17,18 +17,18 @@ def detect_file_type(url):
     elif url_lower.endswith(('.zip', '.tar', '.gz', '.rar')):
         return 'archive'
 
-    # 如果无法根据扩展名判断，则请求该 URL 并查看 Content-Type
+    # If unable to determine from the extension, request the URL and check the Content-Type
     try:
-        # 优先使用 HEAD 请求以提高效率
+        # Prefer using a HEAD request to improve efficiency
         response = requests.head(url, allow_redirects=True, timeout=5)
 
-        # 如果 HEAD 请求失败，尝试 GET 请求，只获取头部
+        # If the HEAD request fails, try a GET request and only fetch the headers
         if response.status_code != 200:
             response = requests.get(url, stream=True, timeout=5)
 
         content_type = response.headers.get('Content-Type', '').lower()
 
-        # 检测 Content-Type 主类型
+        # Detect the Content-Type main type
         if 'image' in content_type:
             return 'image'
         elif 'pdf' in content_type:
@@ -46,7 +46,7 @@ def detect_file_type(url):
         elif 'json' in content_type:
             return 'json'
         else:
-            return 'text'  # 默认情况下视为文本
+            return 'text'  # Default to text if no other type is matched
     except requests.RequestException as e:
         print(f"Error detecting file type for URL {url}: {e}")
         return 'unknown'

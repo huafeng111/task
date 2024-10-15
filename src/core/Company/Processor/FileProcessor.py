@@ -12,12 +12,14 @@ class FileProcessor:
         self.url = url
         self.file_type = file_type
         self.base_dir = f"../CompanyList/{self.company_name}/data"
+        self.session = requests.Session()  # 使用会话对象
         self.headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36",
             "Accept-Language": "en-US,en;q=0.9",
             "Accept-Encoding": "gzip, deflate, br",
             "Connection": "keep-alive"
         }
+        self.session.headers.update(self.headers)  # 在会话中更新头信息
 
     def process(self):
         """
@@ -54,14 +56,22 @@ class FileProcessor:
 
         # 下载文件并保存
         try:
-            response = requests.get(self.url, headers=self.headers)
-            response.raise_for_status()  # 检查是否成功响应
-            with open(file_path, 'wb') as file:
-                file.write(response.content)
-            print(f"Downloaded {file_extension.upper()} file to: {file_path}")
+            response = self.session.get(self.url)  # 使用 session 发送请求
+            response.raise_for_status()  # 检查响应状态
+
+            # 强制将编码设置为 utf-8
+            response.encoding = 'utf-8'
+            html_content = response.text
+
+            # 使用 html2text 将 HTML 转换为纯文本
+            h = html2text.HTML2Text()
+            h.ignore_links = True  # 忽略超链接
+            text = h.handle(html_content)
+
+            # 打印转换后的文本内容的前500个字符
+            print("Converted text preview (first 500 chars):", text[:500])
         except Exception as e:
             print(f"Failed to download {file_extension.upper()} from {self.url}. Error: {e}")
-
 
     def process_pdf(self):
         """
@@ -96,7 +106,7 @@ class FileProcessor:
 
         try:
             # 下载图像文件
-            response = requests.get(self.url, headers=self.headers)
+            response = self.session.get(self.url)  # 使用 session 发送请求
             response.raise_for_status()  # 检查响应状态
 
             # 将图像保存到文件中
@@ -142,7 +152,7 @@ class FileProcessor:
 
         try:
             # 下载 HTML 内容并设置正确的编码
-            response = requests.get(self.url, headers=self.headers)
+            response = self.session.get(self.url)  # 使用 session 发送请求
             response.encoding = response.apparent_encoding  # 使用 requests 的编码检测功能
             response.raise_for_status()  # 检查响应状态
             html_content = response.text
@@ -152,13 +162,16 @@ class FileProcessor:
             h.ignore_links = True  # 忽略超链接
             text = h.handle(html_content)
 
+            # 打印转换后的文本内容的前500个字符
+            print("Converted text preview (first 500 chars):", text[:500])
+
             # 将新的 URL 和转换的文本数据添加到现有的数据中
             new_entry = {
                 "url": self.url,
                 "text": text
             }
             data['entries'].append(new_entry)
-            print("the new enrty is", new_entry)
+
             # 保存更新后的数据回到 json 文件
             with open(json_file_path, 'w', encoding='utf-8') as json_file:
                 json.dump(data, json_file, ensure_ascii=False, indent=4)
@@ -202,7 +215,7 @@ class FileProcessor:
 
         try:
             # 下载 HTML 并转换为纯文本
-            response = requests.get(self.url, headers=self.headers)
+            response = self.session.get(self.url)  # 使用 session 发送请求
             response.raise_for_status()  # 检查响应状态
             html_content = response.text
 
@@ -226,3 +239,4 @@ class FileProcessor:
 
         except Exception as e:
             print(f"Failed to process plaintext from {self.url}. Error: {e}")
+
